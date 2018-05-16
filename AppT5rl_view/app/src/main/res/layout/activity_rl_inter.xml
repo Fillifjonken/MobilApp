@@ -1,0 +1,46 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ android:id = "@+id/Layout01"
+ android:layout_width = "fill_parent"
+ android:layout_height ="fill_parent"
+ android:background="@drawable/ltu">
+ 	<TextView 
+ 	 android:id = "@+id/txtState"
+ 	 android:layout_width = "150dp"
+ 	android:layout_height ="70dp"
+ 	android:layout_alignParentLeft="true"
+ 	android:layout_marginLeft="5dp"
+ 	android:text="No Status"
+ 	android:gravity="center">	       
+ 	</TextView>
+ 	<EditText
+ 	 android:id = "@+id/edtState"
+ 	 android:layout_width = "wrap_content"
+ 	android:layout_height ="70dp"
+ 	android:layout_toRightOf="@+id/txtState"
+ 	android:layout_alignParentRight="true"
+ 	android:hint="Type your state here">	       
+ 	</EditText>    
+ 	
+
+
+ 	<ToggleButton
+ 	    android:id="@+id/tglbtn"
+ 	    android:layout_width="150dp"
+ 	    android:layout_height="wrap_content"
+ 	    android:layout_below="@+id/txtState"
+ 	    android:layout_alignParentLeft="true"
+ 	    android:textOff="Hold Status"
+ 	    android:textOn="Release Status">
+	    
+ 	</ToggleButton>
+
+ 	<Button
+ 	    android:id="@+id/btnSbm"
+ 	    android:layout_width="wrap_content"
+ 	    android:layout_height="wrap_content"
+ 	    android:layout_toRightOf="@+id/tglbtn"
+ 	    android:layout_below="@+id/edtState"
+ 	    android:layout_alignParentRight="true"
+ 	    android:text="Submit Status" />
+ 
+ 	</RelativeLayout>
