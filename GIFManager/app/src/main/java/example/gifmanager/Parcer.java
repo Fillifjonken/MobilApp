@@ -37,15 +37,17 @@ public class Parcer extends MainActivity {
 
     }
 
-    public void setParams(String url){
+    public ArrayAdapter getParce(String url){
         this.url = url;
+        run();
+        return adapter;
     }
     public void run(){
-        new parcer().execute();
+        new urlParcer().execute();
     }
 
 
-    public class parcer extends AsyncTask<Void, Void, Void>{
+    public class urlParcer extends AsyncTask<Void, Void, Void>{
 
 
         @Override
