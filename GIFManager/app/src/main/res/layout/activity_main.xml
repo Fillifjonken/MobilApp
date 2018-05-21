@@ -14,16 +14,30 @@
         android:src="@drawable/gif_logo_2" />
 
     <Button
+        android:id="@+id/buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="openScreenFourA"
+        android:text="Hemmalag"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.226"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.882" />
+
+    <Button
         android:id="@+id/buttons4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="openScreenFour"
-        android:text="Screen four"
+        android:onClick="openScreenFourB"
+        android:text="Bortalag"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.769"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.878" />
+        app:layout_constraintVertical_bias="0.882" />
 
     <TextView
         android:id="@+id/textView2"

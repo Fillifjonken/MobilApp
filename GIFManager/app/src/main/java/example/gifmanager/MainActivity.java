@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     String DIRECTORY = Environment.getExternalStorageDirectory().getPath() + "/GIFmanager/Signatures/";
     String StoredPath = DIRECTORY + "signature.png";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,9 +28,19 @@ public class MainActivity extends AppCompatActivity {
         mImageView.setImageBitmap(BitmapFactory.decodeFile(StoredPath));
     }
 
-    public void openScreenFour(View view){
-        Intent i = new Intent(getApplicationContext(), ScreenFour.class);
-        startActivity(i);
+    public void openScreenFourA(View view){
+        Intent intent = new Intent(getApplicationContext(), ScreenFour.class);
+        Bundle b = new Bundle();
+        b.putString("key", "HomeTeam"); //Your id
+        intent.putExtras(b); //Put your id to your next Intent
+        startActivity(intent);
+    }
+    public void openScreenFourB(View view){
+        Intent intent = new Intent(getApplicationContext(), ScreenFour.class);
+        Bundle b = new Bundle();
+        b.putString("key", "VisitTeam"); //Your id
+        intent.putExtras(b); //Put your id to your next Intent
+        startActivity(intent);
     }
 
 }

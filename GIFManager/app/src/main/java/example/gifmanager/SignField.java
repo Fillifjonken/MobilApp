@@ -38,17 +38,32 @@ public class SignField extends AppCompatActivity {
     View view;
     signature mSignature;
     Bitmap bitmap;
+    String team = "Lag";
+    String StoredPath;
+
 
     // Creating Separate Directory for saving Generated Images
     String DIRECTORY = Environment.getExternalStorageDirectory().getPath() + "/GIFmanager/Signatures/";
     String pic_name = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
     //String StoredPath = DIRECTORY + "signature_" + pic_name + ".png";
-    String StoredPath = DIRECTORY + "signature.png";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_field);
+
+        //Fetches current team from Intent and declares corresponding filename for signature image
+        Bundle b = getIntent().getExtras();
+        if(b != null)
+            team = b.getString("key");
+        this.StoredPath = DIRECTORY + "signature.png";
+        if (team.equals("HomeTeam")){
+            this.StoredPath = DIRECTORY + "signature_home.png";
+        }
+        if (team.equals("VisitTeam")){
+            this.StoredPath = DIRECTORY + "signature_visit.png";
+        }
 
         mContent = (RelativeLayout) findViewById(R.id.canvas_layout);
         mSignature = new signature(getApplicationContext(), null);
@@ -71,29 +86,26 @@ public class SignField extends AppCompatActivity {
 
 
     public void onClick(View v) {
-        // TODO Auto-generated method stub
+        //Clears the drawing canvas
         if (v == mClear) {
             Log.v("log_tag", "Panel Cleared");
             mSignature.clear();
             mSave.setEnabled(false);
-        } else if (v == mSave) {
+        }
+        //Saves the signature into an image
+        else if (v == mSave) {
             Log.v("log_tag", "Panel Saved");
-            if (Build.VERSION.SDK_INT >= 23) {
+            if (Build.VERSION.SDK_INT >= 23) {  //If SDK below 23 no need to ask for permission
                 if (isStoragePermissionGranted() == true){
                     storeSignature();
-                    //set the flag for enabling the continue button in previous activity
-                    ScreenFour.signatureFlag = true;
-                    setResult(RESULT_OK);
-                    finish();
                 }
             } else {
                 storeSignature();
             }
-        } else if(v == mCancel){
+        }
+        //Ends the signature activity without saving
+        else if(v == mCancel){
             Log.v("log_tag", "Panel Canceled");
-            // Calling the BillDetailsActivity
-            //Intent intent = new Intent(SignField.this, ScreenFour.class);
-            //startActivity(intent);
             setResult(RESULT_CANCELED);
             finish();
         }
@@ -104,6 +116,10 @@ public class SignField extends AppCompatActivity {
         view.setDrawingCacheEnabled(true);
         mSignature.save(view, StoredPath);
         Toast.makeText(getApplicationContext(), "Signatur sparad", Toast.LENGTH_LONG).show();
+        //set the flag for enabling the continue button in previous activity
+        ScreenFour.signatureFlag = true;
+        setResult(RESULT_OK);
+        finish();
     }
 
     //Checks permission for storage
@@ -120,20 +136,18 @@ public class SignField extends AppCompatActivity {
         }
     }//End of isStoragePermissionGranted
 
+    //Automatically continues app when user answers permission request
+    //Either proceeds to save signature or shows error message.
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
 
-            view.setDrawingCacheEnabled(true);
-            mSignature.save(view, StoredPath);
-            Toast.makeText(getApplicationContext(), "Successfully Saved", Toast.LENGTH_SHORT).show();
-            // Calling the same class
-            recreate();
+            storeSignature();
         }
         else
         {
-            Toast.makeText(this, "The app was not allowed to write to your storage. Hence, it cannot function properly. Please consider granting it this permission", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Tillåtelse att spara signaturen medgavs ej. Signaturen kunde inte sparas.", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -171,9 +185,9 @@ public class SignField extends AppCompatActivity {
 
                 // Convert the output file to Image such as .png
                 bitmap.compress(Bitmap.CompressFormat.PNG, 90, mFileOutStream);
-                Intent intent = new Intent(SignField.this, ScreenFour.class);
-                intent.putExtra("imagePath", StoredPath);
-                startActivity(intent);
+                //Intent intent = new Intent(SignField.this, ScreenFour.class);
+                //intent.putExtra("imagePath", StoredPath);
+                //startActivity(intent);
                 finish();
                 mFileOutStream.flush();
                 mFileOutStream.close();
