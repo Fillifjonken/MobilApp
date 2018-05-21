@@ -40,9 +40,10 @@ public class SignField extends AppCompatActivity {
     Bitmap bitmap;
 
     // Creating Separate Directory for saving Generated Images
-    String DIRECTORY = Environment.getExternalStorageDirectory().getPath() + "/GIFmanager/Signatures";
+    String DIRECTORY = Environment.getExternalStorageDirectory().getPath() + "/GIFmanager/Signatures/";
     String pic_name = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
-    String StoredPath = DIRECTORY + "signature_" + pic_name + ".png";
+    //String StoredPath = DIRECTORY + "signature_" + pic_name + ".png";
+    String StoredPath = DIRECTORY + "signature.png";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,7 @@ public class SignField extends AppCompatActivity {
         mCancel = (Button) findViewById(R.id.button_cancel);
         view = mContent;
 
-        // Method to create Directory, if the Directory doesn't exists
+        // Creates new directory if specified directory does not already exist
         file = new File(DIRECTORY);
         if (!file.exists()) {
             file.mkdir();
@@ -103,10 +104,9 @@ public class SignField extends AppCompatActivity {
         view.setDrawingCacheEnabled(true);
         mSignature.save(view, StoredPath);
         Toast.makeText(getApplicationContext(), "Signatur sparad", Toast.LENGTH_LONG).show();
-
-
     }
 
+    //Checks permission for storage
     public boolean isStoragePermissionGranted() {
         if (Build.VERSION.SDK_INT >= 23) {
             if (getApplicationContext().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {

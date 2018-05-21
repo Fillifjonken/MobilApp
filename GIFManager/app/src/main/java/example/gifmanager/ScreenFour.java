@@ -8,7 +8,7 @@ import android.view.Window;
 import android.widget.Button;
 
 public class ScreenFour extends AppCompatActivity {
-    public static boolean signatureFlag;    //If true, user has entered its signature in the SignField activity
+    public static boolean signatureFlag;    //Signifies that the user has entered its signature
     static final int REQUEST_CODE = 1;
     Button mConfirm;
 
@@ -22,12 +22,15 @@ public class ScreenFour extends AppCompatActivity {
         checkSignatureFlag();
     }
 
-    public void openSignature(View view){ //Opens SignField activity
+    //Opens SignField activity with result request
+    //(this enables updating the current activity after SignField has finished
+    public void openSignature(View view){
         Intent intent = new Intent(getApplicationContext(), SignField.class);
         startActivityForResult(intent, REQUEST_CODE);
     }
 
     @Override
+    //The result return from SignField activity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
         if (requestCode == REQUEST_CODE) {
@@ -41,9 +44,9 @@ public class ScreenFour extends AppCompatActivity {
     //Checks if SignatureFlag is true (meaning user has entered signature)
     public void checkSignatureFlag(){
         if (signatureFlag) {
-            mConfirm.setEnabled(true);
+            mConfirm.setEnabled(true); //Enables "confirm"-button
         } else {
-            mConfirm.setEnabled(false);
+            mConfirm.setEnabled(false); //Disables "confirm"-button
         }
     }
 }
