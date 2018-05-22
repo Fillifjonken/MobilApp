@@ -62,22 +62,7 @@ public class ScreenThree extends MainActivity{
             }
         });
 
-        /*button.setOnClickListener(new View.OnClickListener(){
 
-            @Override
-            public void onClick(View v){
-                Toast.makeText(getBaseContext(),teamOneUrl, Toast.LENGTH_LONG).show();
-            }
-
-        });
-        button2.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v){
-                Toast.makeText(getBaseContext(),teamTwoUrl, Toast.LENGTH_LONG).show();
-            }
-
-        });*/
         new urlParcer().execute();
     }
 
