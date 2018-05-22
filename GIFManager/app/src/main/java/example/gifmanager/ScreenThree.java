@@ -28,6 +28,7 @@ import java.util.regex.Pattern;
 public class ScreenThree extends MainActivity{
     Button button;
     Button button2;
+    Button button4;
     ListView listView;
     String tempUrlGames;
     String tempUrlPlayers;
@@ -44,6 +45,7 @@ public class ScreenThree extends MainActivity{
         setContentView(R.layout.screen_three);
         button = (Button)findViewById(R.id.button);
         button2 = (Button)findViewById(R.id.button2);
+        button4 = (Button)findViewById(R.id.button4);
         listView = (ListView) findViewById(R.id.listView);
         listTEXT = new ArrayList<String>(); //Array for display names
         listHTML = new ArrayList<String>(); //array for fetching HTML href
@@ -62,9 +64,18 @@ public class ScreenThree extends MainActivity{
             }
         });
 
+        button4.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ScreenFive.class);
+                startActivity(intent);
+            }
+        });
 
         new urlParcer().execute();
     }
+
 
     public void openScreenFourTeam1(View view){
         Intent intent = new Intent(getApplicationContext(), ScreenFour.class);
