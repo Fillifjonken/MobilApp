@@ -1,12 +1,22 @@
 package example.gifmanager;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.util.ArrayList;
 
 public class ScreenFour extends AppCompatActivity {
     public static boolean signatureFlag;    //Signifies that the user has entered its signature
@@ -14,11 +24,16 @@ public class ScreenFour extends AppCompatActivity {
     String team = "Lag"; // or other values
     TextView teamName;
     Button mConfirm;
+    ArrayList<String> adapterBuffer;
+    ArrayAdapter playerAdapter;
+    ListView player_list;
+    private String tempUrlPlayers = "http://teamplaycup.se/cup/?team&home=kurirenspelen/17&scope=A-2&name=Notvikens%20IK";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        adapterBuffer = new ArrayList<String>();
         Bundle b = getIntent().getExtras();
         if(b != null)
             this.team = b.getString("key"); //Fetches the team from Intent
@@ -27,7 +42,9 @@ public class ScreenFour extends AppCompatActivity {
         teamName = (TextView) findViewById(R.id.textView_teamname);
         teamName.setText(team);
         mConfirm = (Button) findViewById(R.id.confirm_button);
+        player_list = (ListView) findViewById(R.id.players_list);
         checkSignatureFlag();
+        new playerParcer().execute();
     }
 
     //Opens SignField activity with result request
@@ -52,6 +69,45 @@ public class ScreenFour extends AppCompatActivity {
             mConfirm.setEnabled(true); //Enables "confirm"-button
         } else {
             mConfirm.setEnabled(false); //Disables "confirm"-button
+        }
+    }
+
+    public class playerParcer extends AsyncTask<Void, Void, Void> {
+        protected Void doInBackground(Void... params) {
+
+
+            try {
+                Document doc = Jsoup.connect(tempUrlPlayers).maxBodySize(0).get();
+                Elements ele = doc.select("div.content div.table-responsive table.table-condensed");
+
+                for(Element element: ele){
+                    Elements rows = element.children().select("tbody");
+                    for(Element row: rows){
+                        Elements names = row.children().select("tr");
+                        for (Element name: names){
+                            String temp = name.text();
+                            adapterBuffer.add(temp);
+
+                        }
+
+                    }
+
+                }
+            }catch(Exception e){
+                System.err.print(e);
+
+            }
+            return null;
+        }
+
+
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            playerAdapter = new ArrayAdapter(ScreenFour.this, android.R.layout.simple_list_item_1, adapterBuffer);
+            player_list.setAdapter(playerAdapter);
+
         }
     }
 }
