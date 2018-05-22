@@ -90,6 +90,13 @@ public class ScreenFour extends AppCompatActivity {
     }
 
     public void confirmTeam(View view){
+        if(DataHolder.getInstance().getActiveTeam() == 1){
+            DataHolder.getInstance().setTeam1Members(playerNames);
+        }
+        if(DataHolder.getInstance().getActiveTeam()==2){
+            DataHolder.getInstance().setTeam2Members(playerNames);
+        }
+
         finish();
     }
 
