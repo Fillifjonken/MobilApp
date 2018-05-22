@@ -48,7 +48,7 @@
         <Button
             android:id="@+id/button2"
             android:layout_width="fill_parent"
-            android:layout_height="100dp"
+            android:layout_height="70dp"
             android:layout_marginLeft="8dp"
             android:layout_toRightOf="@+id/dummy"
             android:background="@drawable/button_back"
@@ -65,7 +65,7 @@
         <Button
             android:id="@+id/button"
             android:layout_width="fill_parent"
-            android:layout_height="100dp"
+            android:layout_height="70dp"
             android:layout_marginRight="8dp"
             android:layout_toLeftOf="@+id/dummy"
             android:background="@drawable/button_back"
