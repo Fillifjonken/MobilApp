@@ -62,7 +62,7 @@ public class ScreenThree extends MainActivity{
             }
         });
 
-        button.setOnClickListener(new View.OnClickListener(){
+        /*button.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v){
@@ -77,8 +77,23 @@ public class ScreenThree extends MainActivity{
                 Toast.makeText(getBaseContext(),teamTwoUrl, Toast.LENGTH_LONG).show();
             }
 
-        });
+        });*/
         new urlParcer().execute();
+    }
+
+    public void openScreenFourTeam1(View view){
+        Intent intent = new Intent(getApplicationContext(), ScreenFour.class);
+        Bundle b = new Bundle(); //Creates new bundle for intent
+        b.putString("key", "HomeTeam"); //puts String into bundle with ID
+        intent.putExtras(b);    //Puts the bundle as extra content for the Intent
+        startActivity(intent);
+    }
+    public void openScreenFourTeam2(View view){
+        Intent intent = new Intent(getApplicationContext(), ScreenFour.class);
+        Bundle b = new Bundle();    //Creates new bundle for intent
+        b.putString("key", "VisitTeam");    //puts String into bundle with ID
+        intent.putExtras(b);    //Puts the bundle as extra content for the Intent
+        startActivity(intent);
     }
 
     public void splitTeams(String item, int index){
