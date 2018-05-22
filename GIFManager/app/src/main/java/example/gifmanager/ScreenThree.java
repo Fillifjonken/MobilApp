@@ -56,7 +56,7 @@ public class ScreenThree extends MainActivity{
             public void onItemClick(AdapterView<?>adapterView, View v, int pos, long id){
 
                 String item = ((TextView)v).getText().toString();
-                Toast.makeText(getBaseContext(), item, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getBaseContext(), item, Toast.LENGTH_LONG).show();
                 //int index = listView.getSelectedItemPosition();
                 splitTeams(item, pos);
             }
