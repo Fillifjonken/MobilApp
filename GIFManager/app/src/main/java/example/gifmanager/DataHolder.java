@@ -1,4 +1,3 @@
-
 package example.gifmanager;
 
 import java.util.ArrayList;
@@ -16,20 +15,13 @@ public class DataHolder {
     private ArrayList<String> team2Members;
     private String resultImagePath;
     private String fairplayImagePath;
-    private String signaturePath;
+    private String team1SignaturePath;
+    private String team2SignaturePath;
     private String reportPath;
 
     private static final DataHolder holder = new DataHolder();
     public static DataHolder getInstance() {return holder;}
 
-
-    public String getAdminCode() {
-        return adminCode;
-    }
-
-    public void setAdminCode(String adminCode) {
-        this.adminCode = adminCode;
-    }
 
     public String getAdminEmail() {
         return adminEmail;
@@ -103,13 +95,6 @@ public class DataHolder {
         this.fairplayImagePath = fairplayImagePath;
     }
 
-    public String getSignaturePath() {
-        return signaturePath;
-    }
-
-    public void setSignaturePath(String signaturePath) {
-        this.signaturePath = signaturePath;
-    }
 
     public Date getCurrentDate() {
         return currentDate;
@@ -126,4 +111,30 @@ public class DataHolder {
     public void setReportPath(String reportPath) {
         this.reportPath = reportPath;
     }
+
+    public String getAdminCode() {
+        return adminCode;
+    }
+
+    public void setAdminCode(String adminCode) {
+        this.adminCode = adminCode;
+    }
+
+    public String getTeam1SignaturePath() {
+        return team1SignaturePath;
+    }
+
+    public void setTeam1SignaturePath(String team1SignaturePath) {
+        this.team1SignaturePath = team1SignaturePath;
+    }
+
+    public String getTeam2SignaturePath() {
+        return team2SignaturePath;
+    }
+
+    public void setTeam2SignaturePath(String team2SignaturePath) {
+        this.team2SignaturePath = team2SignaturePath;
+    }
+
+
 }

@@ -28,18 +28,18 @@ public class MainActivity extends AppCompatActivity {
         mImageView.setImageBitmap(BitmapFactory.decodeFile(StoredPath));
     }
 
-    public void openScreenFourA(View view){
+    public void openScreenFourTeam1(View view){
         Intent intent = new Intent(getApplicationContext(), ScreenFour.class);
-        Bundle b = new Bundle();
-        b.putString("key", "HomeTeam"); //Your id
-        intent.putExtras(b); //Put your id to your next Intent
+        Bundle b = new Bundle(); //Creates new bundle for intent
+        b.putString("key", "HomeTeam"); //puts String into bundle with ID
+        intent.putExtras(b);    //Puts the bundle as extra content for the Intent
         startActivity(intent);
     }
-    public void openScreenFourB(View view){
+    public void openScreenFourTeam2(View view){
         Intent intent = new Intent(getApplicationContext(), ScreenFour.class);
-        Bundle b = new Bundle();
-        b.putString("key", "VisitTeam"); //Your id
-        intent.putExtras(b); //Put your id to your next Intent
+        Bundle b = new Bundle();    //Creates new bundle for intent
+        b.putString("key", "VisitTeam");    //puts String into bundle with ID
+        intent.putExtras(b);    //Puts the bundle as extra content for the Intent
         startActivity(intent);
     }
 

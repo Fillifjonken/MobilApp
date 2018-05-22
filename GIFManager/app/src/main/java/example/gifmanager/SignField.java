@@ -60,9 +60,11 @@ public class SignField extends AppCompatActivity {
         this.StoredPath = DIRECTORY + "signature.png";
         if (team.equals("HomeTeam")){
             this.StoredPath = DIRECTORY + "signature_home.png";
+            DataHolder.getInstance().setTeam1SignaturePath(this.StoredPath);
         }
         if (team.equals("VisitTeam")){
             this.StoredPath = DIRECTORY + "signature_visit.png";
+            DataHolder.getInstance().setTeam2SignaturePath(this.StoredPath);
         }
 
         mContent = (RelativeLayout) findViewById(R.id.canvas_layout);
@@ -116,7 +118,7 @@ public class SignField extends AppCompatActivity {
         view.setDrawingCacheEnabled(true);
         mSignature.save(view, StoredPath);
         Toast.makeText(getApplicationContext(), "Signatur sparad", Toast.LENGTH_LONG).show();
-        //set the flag for enabling the continue button in previous activity
+        //sets the flag for enabling the continue button in previous activity
         ScreenFour.signatureFlag = true;
         setResult(RESULT_OK);
         finish();
