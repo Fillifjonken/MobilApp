@@ -6,34 +6,52 @@
     android:layout_height="match_parent"
     tools:context="example.gifmanager.ScreenThree">
 
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/gif_logo_2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
     <Button
         android:id="@+id/button"
         android:layout_width="170dp"
         android:layout_height="127dp"
-        android:text="Button"
-        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="196dp"
+        android:layout_marginLeft="68dp"
+        android:layout_marginTop="8dp"
+        android:onClick="openScreenFourTeam1"
+        android:text="Hemmalag"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintVertical_bias="0.919" />
+        app:layout_constraintVertical_bias="0.761"
+        android:background="@drawable/button_back"/>
 
     <Button
         android:id="@+id/button2"
         android:layout_width="164dp"
         android:layout_height="126dp"
-        android:text="Button"
-        app:layout_constraintLeft_toRightOf="@+id/button"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="398dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="8dp"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="176dp"
+        android:layout_marginTop="8dp"
+        android:onClick="openScreenFourTeam2"
+        android:text="Bortalag"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.76"
+        android:background="@drawable/button_back"/>
 
     <ListView
         android:id="@+id/listView"
@@ -43,11 +61,28 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/button_back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.081" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="304dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Registrera"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.956"
+        android:background="@drawable/button_back"/>
 
 </android.support.constraint.ConstraintLayout>

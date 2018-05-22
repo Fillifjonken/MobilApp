@@ -5,30 +5,27 @@ import java.util.Date;
 
 public class DataHolder {
     private Date currentDate;
-    private int adminCode;
+
+    private String adminCode;
     private String adminEmail;
-    private int Nr;
+    private String Nr;
     private String groupCode;
     private String team1Name;
     private String team2Name;
+    private String team1Url;
+    private String team2Url;
     private ArrayList<String> team1Members;
     private ArrayList<String> team2Members;
     private String resultImagePath;
     private String fairplayImagePath;
     private String signaturePath;
     private String reportPath;
+    private String team1SignaturePath;
+    private String team2SignaturePath;
+    private int activeTeam;
 
     private static final DataHolder holder = new DataHolder();
     public static DataHolder getInstance() {return holder;}
-
-
-    public int getAdminCode() {
-        return adminCode;
-    }
-
-    public void setAdminCode(int adminCode) {
-        this.adminCode = adminCode;
-    }
 
     public String getAdminEmail() {
         return adminEmail;
@@ -54,11 +51,12 @@ public class DataHolder {
         this.team2Members = team2Members;
     }
 
-    public int getNr() {
+
+    public String getNr() {
         return Nr;
     }
 
-    public void setNr(int nr) {
+    public void setNr(String nr) {
         Nr = nr;
     }
 
@@ -125,5 +123,51 @@ public class DataHolder {
     public void setReportPath(String reportPath) {
         this.reportPath = reportPath;
     }
-}
 
+    public String getAdminCode() {
+        return adminCode;
+    }
+
+    public void setAdminCode(String adminCode) {
+        this.adminCode = adminCode;
+    }
+
+    public String getTeam1SignaturePath() {
+        return team1SignaturePath;
+    }
+
+    public void setTeam1SignaturePath(String team1SignaturePath) {
+        this.team1SignaturePath = team1SignaturePath;
+    }
+
+    public String getTeam2SignaturePath() {
+        return team2SignaturePath;
+    }
+
+    public void setTeam2SignaturePath(String team2SignaturePath) {
+        this.team2SignaturePath = team2SignaturePath;
+    }
+
+    public void setTeam1Url(String team1Url){
+        this.team1Url = team1Url;
+    }
+
+    public String getTeam1Url(){
+        return team1Url;
+    }
+
+    public void setTeam2Url(String team2Url){
+        this.team2Url = team2Url;
+    }
+
+    public String getTeam2Url(){
+        return team2Url;
+    }
+
+    public void setActiveTeam(int activeTeam) {
+        this.activeTeam = activeTeam;
+    }
+    public int getActiveTeam(){
+        return activeTeam;
+    }
+}

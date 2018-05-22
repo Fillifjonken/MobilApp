@@ -34,7 +34,6 @@ public class ScreenThree extends MainActivity{
     ArrayAdapter adapter;
     ArrayList listTEXT;
     ArrayList listHTML;
-    ArrayList compareList;
     String teamOneUrl;
     String teamTwoUrl;
 
@@ -46,8 +45,8 @@ public class ScreenThree extends MainActivity{
         button = (Button)findViewById(R.id.button);
         button2 = (Button)findViewById(R.id.button2);
         listView = (ListView) findViewById(R.id.listView);
-        listTEXT = new ArrayList<String>();
-        listHTML = new ArrayList<String>();
+        listTEXT = new ArrayList<String>(); //Array for display names
+        listHTML = new ArrayList<String>(); //array for fetching HTML href
         //compareList = new ArrayList<String>();
         tempUrlGames = "http://teamplaycup.se/cup/?games&home=kurirenspelen/17&scope=all&arena=A%2011-manna%20(Gstad)&field=";
         tempUrlPlayers = "http://teamplaycup.se/cup/?team&home=kurirenspelen/17&scope=A-2&name=Notvikens%20IK";
@@ -57,55 +56,71 @@ public class ScreenThree extends MainActivity{
             public void onItemClick(AdapterView<?>adapterView, View v, int pos, long id){
 
                 String item = ((TextView)v).getText().toString();
-                Toast.makeText(getBaseContext(), item, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getBaseContext(), item, Toast.LENGTH_LONG).show();
                 //int index = listView.getSelectedItemPosition();
                 splitTeams(item, pos);
             }
         });
 
-        button.setOnClickListener(new View.OnClickListener(){
 
-            @Override
-            public void onClick(View v){
-                Toast.makeText(getBaseContext(),teamOneUrl, Toast.LENGTH_LONG).show();
-            }
-
-        });
-        button2.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v){
-                Toast.makeText(getBaseContext(),teamTwoUrl, Toast.LENGTH_LONG).show();
-            }
-
-        });
         new urlParcer().execute();
     }
 
+    public void openScreenFourTeam1(View view){
+        Intent intent = new Intent(getApplicationContext(), ScreenFour.class);
+        Bundle b = new Bundle(); //Creates new bundle for intent
+        b.putString("key", "HomeTeam"); //puts String into bundle with ID
+        intent.putExtras(b);    //Puts the bundle as extra content for the Intent
+        DataHolder.getInstance().setActiveTeam(1);
+        startActivity(intent);
+    }
+    public void openScreenFourTeam2(View view){
+        Intent intent = new Intent(getApplicationContext(), ScreenFour.class);
+        Bundle b = new Bundle();    //Creates new bundle for intent
+        b.putString("key", "VisitTeam");    //puts String into bundle with ID
+        intent.putExtras(b);    //Puts the bundle as extra content for the Intent
+        DataHolder.getInstance().setActiveTeam(2);
+        startActivity(intent);
+    }
+
+    //function for dividing fetched string.
     public void splitTeams(String item, int index){
         String tempHTML = listHTML.get(index).toString();
         String[] parts = tempHTML.split("<td>");
         String temp2 = parts[4];
+        String test = parts[2];
+        //Split Time
+        String[] timeSplit = parts[3].split("<");
+        String time = timeSplit[0];
+        //Split group number
+        String[] groupSplit = parts[2].split(">");
+        String[] groupSplit2 = groupSplit[1].split("<");
+        String group = groupSplit2[0];
+        DataHolder.getInstance().setGroupCode(group);
+        // Split match Number
+        String[] nrSplit = parts[1].split(">");
+        String[] nrSplit2 = nrSplit[1].split("<");
+        String nr = nrSplit2[0];
+        DataHolder.getInstance().setNr(nr);
+        //Split team names and URL
         String[] parts2 = temp2.split("</a>");
-
-
         String[] teamOne = parts2[0].split(">");
-        button.setText(teamOne[1]);
+        button.setText(teamOne[1]); //Set button text to teamname of hometeam
+        DataHolder.getInstance().setTeam1Name(teamOne[1]);
         String[] teamTwo = parts2[1].split(">");
-        button2.setText(teamTwo[1]);
+        button2.setText(teamTwo[1]); //set button text to teamname of awayteam
+        DataHolder.getInstance().setTeam2Name(teamTwo[1]);
 
         String[] teamOneSplit = teamOne[0].split("\"");
         String[] teamTwoSplit = teamTwo[0].split("\"");
 
         teamOneUrl = "http://teamplaycup.se/cup/" + teamOneSplit[1];
+        teamOneUrl = teamOneUrl.replace("amp;", "");
+        DataHolder.getInstance().setTeam1Url(teamOneUrl); //set url for parcing player names
         teamTwoUrl = "http://teamplaycup.se/cup/" + teamTwoSplit[1];
+        teamTwoUrl = teamTwoUrl.replace("amp;", "");
+        DataHolder.getInstance().setTeam2Url(teamTwoUrl); //set url for parcing player names
 
-
-
-
-
-
-        //button.setText(parts2[1]);
     }
 
 
