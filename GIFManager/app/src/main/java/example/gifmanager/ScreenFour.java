@@ -59,7 +59,7 @@ public class ScreenFour extends AppCompatActivity {
             }
         });
         fetchUrl(); //fetches parcing url
-        checkSignatureFlag();
+        checkSignatureFlag(); //checks Signature flag
         new playerParcer().execute(); //start parcer
     }
 
@@ -87,6 +87,10 @@ public class ScreenFour extends AppCompatActivity {
         b.putString("key", team); //Declares which team for next Intent
         intent.putExtras(b); //Puts team to the next Intent
         startActivityForResult(intent, REQUEST_CODE);
+    }
+
+    public void confirmTeam(View view){
+        finish();
     }
 
     @Override
