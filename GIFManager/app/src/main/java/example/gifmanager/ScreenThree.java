@@ -45,8 +45,8 @@ public class ScreenThree extends MainActivity{
         button = (Button)findViewById(R.id.button);
         button2 = (Button)findViewById(R.id.button2);
         listView = (ListView) findViewById(R.id.listView);
-        listTEXT = new ArrayList<String>();
-        listHTML = new ArrayList<String>();
+        listTEXT = new ArrayList<String>(); //Array for display names
+        listHTML = new ArrayList<String>(); //array for fetching HTML href
         //compareList = new ArrayList<String>();
         tempUrlGames = "http://teamplaycup.se/cup/?games&home=kurirenspelen/17&scope=all&arena=A%2011-manna%20(Gstad)&field=";
         tempUrlPlayers = "http://teamplaycup.se/cup/?team&home=kurirenspelen/17&scope=A-2&name=Notvikens%20IK";
@@ -83,6 +83,7 @@ public class ScreenThree extends MainActivity{
         startActivity(intent);
     }
 
+    //function for dividing fetched string.
     public void splitTeams(String item, int index){
         String tempHTML = listHTML.get(index).toString();
         String[] parts = tempHTML.split("<td>");
@@ -91,10 +92,10 @@ public class ScreenThree extends MainActivity{
 
 
         String[] teamOne = parts2[0].split(">");
-        button.setText(teamOne[1]);
+        button.setText(teamOne[1]); //Set button text to teamname of hometeam
         DataHolder.getInstance().setTeam1Name(teamOne[1]);
         String[] teamTwo = parts2[1].split(">");
-        button2.setText(teamTwo[1]);
+        button2.setText(teamTwo[1]); //set button text to teamname of awayteam
         DataHolder.getInstance().setTeam2Name(teamTwo[1]);
 
         String[] teamOneSplit = teamOne[0].split("\"");
@@ -102,17 +103,11 @@ public class ScreenThree extends MainActivity{
 
         teamOneUrl = "http://teamplaycup.se/cup/" + teamOneSplit[1];
         teamOneUrl = teamOneUrl.replace("amp;", "");
-        DataHolder.getInstance().setTeam1Url(teamOneUrl);
+        DataHolder.getInstance().setTeam1Url(teamOneUrl); //set url for parcing player names
         teamTwoUrl = "http://teamplaycup.se/cup/" + teamTwoSplit[1];
         teamTwoUrl = teamTwoUrl.replace("amp;", "");
-        DataHolder.getInstance().setTeam2Url(teamTwoUrl);
+        DataHolder.getInstance().setTeam2Url(teamTwoUrl); //set url for parcing player names
 
-
-
-
-
-
-        //button.setText(parts2[1]);
     }
 
 

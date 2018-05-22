@@ -26,11 +26,11 @@ public class ScreenFour extends AppCompatActivity {
     String team = "Lag"; // or other values
     TextView teamName;
     Button mConfirm;
-    private ArrayList<String> adapterBuffer;
-    private ArrayList<String> playerNames;
-    private ArrayAdapter playerAdapter;
+    private ArrayList<String> adapterBuffer; //Array for adding to the list view adapter
+    private ArrayList<String> playerNames; //temporary array for storing player names
+    private ArrayAdapter playerAdapter; //adapter for the list view
     ListView player_list;
-    private String urlPlayers;
+    private String urlPlayers; //url for fetching url to players
 
 
     @Override
@@ -49,6 +49,7 @@ public class ScreenFour extends AppCompatActivity {
         player_list = (ListView) findViewById(R.id.players_list);
         player_list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
+            //onclick adds players to temporary array
             @Override
             public void onItemClick(AdapterView<?>adapterView, View v, int pos, long id){
 
@@ -57,11 +58,12 @@ public class ScreenFour extends AppCompatActivity {
                 addPlayer(item);
             }
         });
-        fetchUrl();
+        fetchUrl(); //fetches parcing url
         checkSignatureFlag();
-        new playerParcer().execute();
+        new playerParcer().execute(); //start parcer
     }
 
+    //Function for fetching the correct url for parcing
     public void fetchUrl(){
         if(DataHolder.getInstance().getActiveTeam() == 1){
             urlPlayers = DataHolder.getInstance().getTeam1Url();
@@ -70,6 +72,7 @@ public class ScreenFour extends AppCompatActivity {
         }
     }
 
+    //add player name to temporary array
     public void addPlayer(String player){
         if(!playerNames.contains(player)){
             playerNames.add(player);
@@ -101,9 +104,9 @@ public class ScreenFour extends AppCompatActivity {
         }
     }
 
+    //Parce information from teamplaycup.se
     public class playerParcer extends AsyncTask<Void, Void, Void> {
         protected Void doInBackground(Void... params) {
-
 
             try {
                 Document doc = Jsoup.connect(urlPlayers).maxBodySize(0).get();
@@ -116,15 +119,11 @@ public class ScreenFour extends AppCompatActivity {
                         for (Element name: names){
                             String temp = name.text();
                             adapterBuffer.add(temp);
-
                         }
-
                     }
-
                 }
             }catch(Exception e){
                 System.err.print(e);
-
             }
             return null;
         }
