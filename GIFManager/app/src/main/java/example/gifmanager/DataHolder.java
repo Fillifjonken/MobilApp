@@ -1,15 +1,15 @@
 package example.gifmanager;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class DataHolder {
-    private Date currentDate;
 
+    private String currentDate;
     private String adminCode;
     private String adminEmail;
     private String Nr;
     private String groupCode;
+    private String timeOfMatch;
     private String team1Name;
     private String team2Name;
     private String team1Url;
@@ -18,10 +18,9 @@ public class DataHolder {
     private ArrayList<String> team2Members;
     private String resultImagePath;
     private String fairplayImagePath;
-    private String signaturePath;
-    private String reportPath;
     private String team1SignaturePath;
     private String team2SignaturePath;
+    private String reportPath;
     private int activeTeam;
 
     private static final DataHolder holder = new DataHolder();
@@ -50,7 +49,6 @@ public class DataHolder {
     public void setTeam2Members(ArrayList<String> team2Members) {
         this.team2Members = team2Members;
     }
-
 
     public String getNr() {
         return Nr;
@@ -100,22 +98,6 @@ public class DataHolder {
         this.fairplayImagePath = fairplayImagePath;
     }
 
-    public String getSignaturePath() {
-        return signaturePath;
-    }
-
-    public void setSignaturePath(String signaturePath) {
-        this.signaturePath = signaturePath;
-    }
-
-    public Date getCurrentDate() {
-        return currentDate;
-    }
-
-    public void setCurrentDate(Date currentDate) {
-        this.currentDate = currentDate;
-    }
-
     public String getReportPath() {
         return reportPath;
     }
@@ -146,6 +128,23 @@ public class DataHolder {
 
     public void setTeam2SignaturePath(String team2SignaturePath) {
         this.team2SignaturePath = team2SignaturePath;
+    }
+
+
+    public String getTimeOfMatch() {
+        return timeOfMatch;
+    }
+
+    public void setTimeOfMatch(String timeOfMatch) {
+        this.timeOfMatch = timeOfMatch;
+    }
+
+    public String getCurrentDate() {
+        return currentDate;
+    }
+
+    public void setCurrentDate(String currentDate) {
+        this.currentDate = currentDate;
     }
 
     public void setTeam1Url(String team1Url){

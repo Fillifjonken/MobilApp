@@ -2,8 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="example.gifmanager">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-sdk android:maxSdkVersion="25"
         android:minSdkVersion="17"/>
@@ -15,6 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+
         <activity android:name=".MainActivity">
 
             <intent-filter>
@@ -23,9 +30,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ScreenThree"></activity>
-        <activity android:name=".ScreenFour"></activity>
-        <activity android:name=".SignField"></activity>
+        <activity android:name=".ScreenThree" />
+        <activity android:name=".ScreenFour" />
+        <activity android:name=".SignField" />
+        <activity android:name=".ScreenFive" />
+        <activity android:name=".PDFActivity" />
+
     </application>
 
 </manifest>
