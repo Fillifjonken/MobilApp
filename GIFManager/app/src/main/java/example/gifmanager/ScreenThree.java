@@ -34,7 +34,6 @@ public class ScreenThree extends MainActivity{
     ArrayAdapter adapter;
     ArrayList listTEXT;
     ArrayList listHTML;
-    ArrayList compareList;
     String teamOneUrl;
     String teamTwoUrl;
 
