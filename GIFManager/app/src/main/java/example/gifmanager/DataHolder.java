@@ -11,6 +11,8 @@ public class DataHolder {
     private String groupCode;
     private String team1Name;
     private String team2Name;
+    private String team1Url;
+    private String team2Url;
     private ArrayList<String> team1Members;
     private ArrayList<String> team2Members;
     private String resultImagePath;
@@ -18,6 +20,8 @@ public class DataHolder {
     private String team1SignaturePath;
     private String team2SignaturePath;
     private String reportPath;
+    private int activeTeam;
+
 
     private static final DataHolder holder = new DataHolder();
     public static DataHolder getInstance() {return holder;}
@@ -136,5 +140,26 @@ public class DataHolder {
         this.team2SignaturePath = team2SignaturePath;
     }
 
+    public void setTeam1Url(String team1Url){
+        this.team1Url = team1Url;
+    }
 
+    public String getTeam1Url(){
+        return team1Url;
+    }
+
+    public void setTeam2Url(String team2Url){
+        this.team2Url = team2Url;
+    }
+
+    public String getTeam2Url(){
+        return team2Url;
+    }
+
+    public void setActiveTeam(int activeTeam) {
+        this.activeTeam = activeTeam;
+    }
+    public int getActiveTeam(){
+        return activeTeam;
+    }
 }

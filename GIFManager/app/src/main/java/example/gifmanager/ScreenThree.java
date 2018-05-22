@@ -71,6 +71,7 @@ public class ScreenThree extends MainActivity{
         Bundle b = new Bundle(); //Creates new bundle for intent
         b.putString("key", "HomeTeam"); //puts String into bundle with ID
         intent.putExtras(b);    //Puts the bundle as extra content for the Intent
+        DataHolder.getInstance().setActiveTeam(1);
         startActivity(intent);
     }
     public void openScreenFourTeam2(View view){
@@ -78,6 +79,7 @@ public class ScreenThree extends MainActivity{
         Bundle b = new Bundle();    //Creates new bundle for intent
         b.putString("key", "VisitTeam");    //puts String into bundle with ID
         intent.putExtras(b);    //Puts the bundle as extra content for the Intent
+        DataHolder.getInstance().setActiveTeam(2);
         startActivity(intent);
     }
 
@@ -90,14 +92,20 @@ public class ScreenThree extends MainActivity{
 
         String[] teamOne = parts2[0].split(">");
         button.setText(teamOne[1]);
+        DataHolder.getInstance().setTeam1Name(teamOne[1]);
         String[] teamTwo = parts2[1].split(">");
         button2.setText(teamTwo[1]);
+        DataHolder.getInstance().setTeam2Name(teamTwo[1]);
 
         String[] teamOneSplit = teamOne[0].split("\"");
         String[] teamTwoSplit = teamTwo[0].split("\"");
 
         teamOneUrl = "http://teamplaycup.se/cup/" + teamOneSplit[1];
+        teamOneUrl = teamOneUrl.replace("amp;", "");
+        DataHolder.getInstance().setTeam1Url(teamOneUrl);
         teamTwoUrl = "http://teamplaycup.se/cup/" + teamTwoSplit[1];
+        teamTwoUrl = teamTwoUrl.replace("amp;", "");
+        DataHolder.getInstance().setTeam2Url(teamTwoUrl);
 
 
 

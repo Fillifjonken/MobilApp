@@ -27,7 +27,7 @@ public class ScreenFour extends AppCompatActivity {
     ArrayList<String> adapterBuffer;
     ArrayAdapter playerAdapter;
     ListView player_list;
-    private String tempUrlPlayers = "http://teamplaycup.se/cup/?team&home=kurirenspelen/17&scope=A-2&name=Notvikens%20IK";
+    private String urlPlayers;
 
 
     @Override
@@ -43,9 +43,19 @@ public class ScreenFour extends AppCompatActivity {
         teamName.setText(team);
         mConfirm = (Button) findViewById(R.id.confirm_button);
         player_list = (ListView) findViewById(R.id.players_list);
+        fetchUrl();
         checkSignatureFlag();
         new playerParcer().execute();
     }
+
+    public void fetchUrl(){
+        if(DataHolder.getInstance().getActiveTeam() == 1){
+            urlPlayers = DataHolder.getInstance().getTeam1Url();
+        }if(DataHolder.getInstance().getActiveTeam() == 2){
+            urlPlayers = DataHolder.getInstance().getTeam2Url();
+        }
+    }
+
 
     //Opens SignField activity with result request
     //(this enables updating the current activity after SignField has finished
@@ -77,7 +87,7 @@ public class ScreenFour extends AppCompatActivity {
 
 
             try {
-                Document doc = Jsoup.connect(tempUrlPlayers).maxBodySize(0).get();
+                Document doc = Jsoup.connect(urlPlayers).maxBodySize(0).get();
                 Elements ele = doc.select("div.content div.table-responsive table.table-condensed");
 
                 for(Element element: ele){
