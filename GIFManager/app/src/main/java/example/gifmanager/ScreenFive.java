@@ -29,7 +29,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ScreenFive extends MainActivity{
@@ -187,6 +186,7 @@ public class ScreenFive extends MainActivity{
         mGenerate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                DataHolder.getInstance().setReportPath(getReportPath());
                 startActivityForResult(gereratePDF, GENERATE_PDF_CODE);
             }
         });
@@ -232,6 +232,19 @@ public class ScreenFive extends MainActivity{
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(intent, SEND_EMAIL_CODE);
         }
+    }
+
+    public String getReportPath(){
+
+        String nr = DataHolder.getInstance().getNr();
+        String currentDate = DataHolder.getInstance().getCurrentDate();
+        String timeOfMatch = DataHolder.getInstance().getTimeOfMatch();
+        String groupCode = DataHolder.getInstance().getGroupCode();
+
+        String reportPath = Environment.getExternalStorageDirectory() + File.separator +
+                "GIFManager" + File.separator + "MATCH_"+ nr + "-" + currentDate + "-" +
+                timeOfMatch + "-" + groupCode + ".pdf";
+        return reportPath;
     }
 
     public Bitmap rotateImage(int angle, Bitmap bitmapSrc) {
@@ -329,13 +342,13 @@ public class ScreenFive extends MainActivity{
         String currentDate = "20182205";
         String adminCode = "1337";
         String adminEmail = "awesomeAdmin@email.com";
-        String nr = "13";
-        String groupCode = "A2";
-        String team1Name = "Gammelstads IF";
-        String team2Name = "Porsön IF";
-        String timeOfMatch = "13:37";
-        ArrayList<String> team1Members = new ArrayList<>();
-        ArrayList<String> team2Members = new ArrayList<>();
+        //String nr = "13";
+        //String groupCode = "A2";
+        //String team1Name = "Gammelstads IF";
+        //String team2Name = "Porsön IF";
+        //String timeOfMatch = "13:37";
+        //ArrayList<String> team1Members = new ArrayList<>();
+        //ArrayList<String> team2Members = new ArrayList<>();
         String resultImagePath = Environment.getExternalStorageDirectory() + File.separator + "GIFManager" + File.separator + "IMG_result.jpg";
         String fairplayImagePath = Environment.getExternalStorageDirectory() + File.separator + "GIFManager" + File.separator + "IMG_fairplay.jpg";
         String team1SignaturePath = Environment.getExternalStorageDirectory() + File.separator + "GIFManager" + File.separator + "IMG_signature1.jpg";
@@ -346,32 +359,30 @@ public class ScreenFive extends MainActivity{
         //File pdfFile = new File(dest + File.separator +
         //        "MATCH_"+ nr + "-" + currentDate + "-" + timeOfMatch + "-" + groupCode + ".pdf");
         //String reportPath = Uri.fromFile(pdfFile).toString();
-        String reportPath = Environment.getExternalStorageDirectory() + File.separator +
-                "GIFManager" + File.separator + "MATCH_"+ nr + "-" + currentDate + "-" +
-                timeOfMatch + "-" + groupCode + ".pdf";
 
+        /*
         for(int i = 0; i < 15; i++){
             team1Members.add("Team1 member" + Integer.toString(i));
             team2Members.add("Team2 member" + Integer.toString(i));
         }
 
         team1Members.remove(14);
-
+         */
         DataHolder.getInstance().setCurrentDate(currentDate);
         DataHolder.getInstance().setAdminCode(adminCode);
         DataHolder.getInstance().setAdminEmail(adminEmail);
-        DataHolder.getInstance().setNr(nr);
-        DataHolder.getInstance().setGroupCode(groupCode);
-        DataHolder.getInstance().setTimeOfMatch(timeOfMatch);
-        DataHolder.getInstance().setTeam1Members(team1Members);
-        DataHolder.getInstance().setTeam2Members(team2Members);
-        DataHolder.getInstance().setTeam1Name(team1Name);
-        DataHolder.getInstance().setTeam2Name(team2Name);
+        //DataHolder.getInstance().setNr(nr);
+        //DataHolder.getInstance().setGroupCode(groupCode);
+        //DataHolder.getInstance().setTimeOfMatch(timeOfMatch);
+        //DataHolder.getInstance().setTeam1Members(team1Members);
+        //DataHolder.getInstance().setTeam2Members(team2Members);
+        //DataHolder.getInstance().setTeam1Name(team1Name);
+        //DataHolder.getInstance().setTeam2Name(team2Name);
         DataHolder.getInstance().setResultImagePath(resultImagePath);
         DataHolder.getInstance().setFairplayImagePath(fairplayImagePath);
         DataHolder.getInstance().setTeam1SignaturePath(team1SignaturePath);
         DataHolder.getInstance().setTeam2SignaturePath(team2SignaturePath);
-        DataHolder.getInstance().setReportPath(reportPath);
+        //DataHolder.getInstance().setReportPath(reportPath);
     }
 
     /*
