@@ -3,6 +3,7 @@
     package="example.gifmanager">
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
 
     <uses-sdk android:maxSdkVersion="25"
         android:minSdkVersion="17"/>
@@ -23,6 +24,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ScreenThree"></activity>
+        <activity android:name=".ScreenFour"></activity>
+        <activity android:name=".SignField"></activity>
     </application>
 
 </manifest>
