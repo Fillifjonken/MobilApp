@@ -37,4 +37,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    protected void onResume() {
+
+        super.onResume();
+    }
+
+    protected void onPause() {
+
+        super.onPause();
+    }
 }

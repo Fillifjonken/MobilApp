@@ -47,21 +47,18 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal|fill_horizontal|center">
+            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/scanResult"
-                android:layout_width="180dp"
+                android:layout_width="176dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
                 android:text="Scan results" />
 
             <Button
                 android:id="@+id/scanFairplay"
                 android:layout_width="180dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
                 android:text="Scan Fairplay" />
         </TableRow>
 
@@ -92,13 +89,20 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent" >
 
-        <Button
-            android:id="@+id/finalize"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:text="Finalize match and send report" />
+            <Button
+                android:id="@+id/generate"
+                android:layout_width="176dp"
+                android:layout_height="58dp"
+                android:text="Generate report" />
+
+            <Button
+                android:id="@+id/finalize"
+                android:layout_width="176dp"
+                android:layout_height="58dp"
+                android:text="Send Report" />
+        </TableRow>
 
     </TableLayout>
 

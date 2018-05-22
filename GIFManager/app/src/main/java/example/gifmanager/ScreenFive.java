@@ -19,6 +19,7 @@ import android.provider.ContactsContract;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -35,6 +36,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -47,10 +49,12 @@ public class ScreenFive extends MainActivity{
     private Camera mCamera;
     private CameraPreview mPreview;
     private static final String TAG = "ScreenFive";
-    private int cameraId;
     private static final int PERMISSION_REQUEST_CAMERA = 0;
     private static final int RESULT_CAPTURE = 0;
     private static final int FAIRPLAY_CAPTURE = 1;
+    private static final int GENERATE_PDF_CODE = 0;
+    private static final int SHOW_PDF_CODE = 1;
+    private static final int SEND_EMAIL_CODE = 2;
     private static int CAPTURE_MODE;
     private Button captureResult;
     private Button captureFairplay;
@@ -60,8 +64,6 @@ public class ScreenFive extends MainActivity{
     private int grantResults[];
     private Boolean cameraReady;
     private ProgressBar mProgressBar;
-    private Button mFinalize;
-
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -79,7 +81,7 @@ public class ScreenFive extends MainActivity{
         }
 
         cameraReady = false;
-        cameraId = findBackFacingCamera();
+        int cameraId = findBackFacingCamera();
         if (cameraId < 0) {
             Toast.makeText(this, "No front facing camera found.",
                     Toast.LENGTH_LONG).show();
@@ -118,6 +120,15 @@ public class ScreenFive extends MainActivity{
                     Log.d(TAG, "Error creating media file, check storage permissions: "); //+
                             //e.getMessage());
                     return;
+                }
+
+                if(Build.VERSION.SDK_INT>=24){
+                    try{
+                        Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposure");
+                        m.invoke(null);
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
                 }
 
                 try {
@@ -182,17 +193,17 @@ public class ScreenFive extends MainActivity{
 
         cameraReady = true;
 
-        mFinalize = (Button) findViewById(R.id.finalize);
+        Button mFinalize = (Button) findViewById(R.id.finalize);
 
-        final Intent intent2 = new Intent(this, PDFActivity.class);
-        Button button2 = (Button) findViewById(R.id.button2);
+        final Intent gereratePDF = new Intent(this, PDFActivity.class);
+
 
         loadDummyData(); //Remove for final version
+
 
         mFinalize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(intent2);
                 String[] sendTo = new String[1];
                 sendTo[0] = DataHolder.getInstance().getAdminEmail();
                 StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
@@ -201,6 +212,42 @@ public class ScreenFive extends MainActivity{
                 composeEmail(sendTo, "Match Report", reportUri);
             }
         });
+
+        Button mGenerate = (Button) findViewById(R.id.generate);
+        mGenerate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(gereratePDF, GENERATE_PDF_CODE);
+            }
+        });
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //get result from data, do something with it
+
+        if(requestCode == GENERATE_PDF_CODE){
+            File dest = new File(Environment.getExternalStorageDirectory(), "GIFManager");
+            File pdfFile = new File(dest + File.separator +
+                    "DOC_"+ "result" + ".pdf");
+            final Intent showPDF = new Intent(Intent.ACTION_VIEW);
+            showPDF.setDataAndType(Uri.fromFile(pdfFile), "application/pdf");
+            showPDF.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            startActivityForResult(showPDF, SHOW_PDF_CODE);
+        }else if(requestCode == SHOW_PDF_CODE){
+
+        }else{
+            //finish();
+        }
+
+    }
+
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    protected void onPause() {
+        super.onPause();
     }
 
     public void composeEmail(String[] addresses, String subject, Uri attachment) {
@@ -210,7 +257,7 @@ public class ScreenFive extends MainActivity{
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         intent.putExtra(Intent.EXTRA_STREAM, attachment);
         if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
+            startActivityForResult(intent, SEND_EMAIL_CODE);
         }
     }
 
@@ -333,7 +380,7 @@ public class ScreenFive extends MainActivity{
 
     public void loadDummyData(){
         Date currentDate = new Date();
-        int adminCode = 1337;
+        String adminCode = "1337";
         String adminEmail = "awesomeAdmin@email.com";
         int nr = 13;
         String groupCode = "A2";
@@ -343,7 +390,8 @@ public class ScreenFive extends MainActivity{
         ArrayList<String> team2Members = new ArrayList<>();
         String resultImagePath = Environment.getExternalStorageDirectory() + File.separator + "GIFManager" + File.separator + "IMG_result.jpg";
         String fairplayImagePath = Environment.getExternalStorageDirectory() + File.separator + "GIFManager" + File.separator + "IMG_fairplay.jpg";
-        String signaturePath = Environment.getExternalStorageDirectory() + File.separator + "GIFManager" + File.separator + "IMG_signature.jpg";
+        String team1SignaturePath = Environment.getExternalStorageDirectory() + File.separator + "GIFManager" + File.separator + "IMG_signature1.jpg";
+        String team2SignaturePath = Environment.getExternalStorageDirectory() + File.separator + "GIFManager" + File.separator + "IMG_signature2.jpg";
         //String reportPath = Environment.getExternalStorageDirectory() + File.separator + "GIFManager" + File.separator + "DOC_result.pdf";
 
         File dest = new File(Environment.getExternalStorageDirectory(), "GIFManager");
@@ -368,7 +416,8 @@ public class ScreenFive extends MainActivity{
         DataHolder.getInstance().setTeam2Name(team2Name);
         DataHolder.getInstance().setResultImagePath(resultImagePath);
         DataHolder.getInstance().setFairplayImagePath(fairplayImagePath);
-        DataHolder.getInstance().setSignaturePath(signaturePath);
+        DataHolder.getInstance().setTeam1SignaturePath(team1SignaturePath);
+        DataHolder.getInstance().setTeam2SignaturePath(team2SignaturePath);
         DataHolder.getInstance().setReportPath(reportPath);
     }
 /*
@@ -460,54 +509,4 @@ public class ScreenFive extends MainActivity{
             }
         }
     }
-
-
-    /*
-    private class takeAsyncPicture extends AsyncTask<String, Long, Void> {
-
-        @Override
-        protected Void doInBackground(String... strings) {
-            final Camera.PictureCallback mPicture = new Camera.PictureCallback() {
-
-                @Override
-                public void onPictureTaken(byte[] data, Camera camera) {
-                    File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
-                    if (pictureFile == null){
-                        Log.d(TAG, "Error creating media file, check storage permissions: "); //+
-                        //e.getMessage());
-                        return;
-                    }
-
-                    try {
-                        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                        Bitmap bitmap = BitmapFactory.decodeByteArray(data , 0, data.length);
-                        bitmap = rotateImage(90, bitmap);
-                        int width = bitmap.getWidth();
-                        int height = bitmap.getHeight()/2;
-                        int[] pixels = new int[width*height];//the size of the array is the dimensions of the sub-photo
-                        bitmap.getPixels(pixels, 0, width, 0, 0, width, height);//the stride value is (in my case) the width value
-                        bitmap = Bitmap.createBitmap(pixels, 0, width, width, height, Bitmap.Config.ARGB_8888);//ARGB_8888 is a good quality configuration
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);//100 is the best quality possibe
-                        byte[] square = bos.toByteArray();
-
-                        FileOutputStream fos = new FileOutputStream(pictureFile);
-                        //fos.write(data);
-                        fos.write(square);
-                        fos.close();
-                    } catch (FileNotFoundException e) {
-                        Log.d(TAG, "File not found: " + e.getMessage());
-                    } catch (IOException e) {
-                        Log.d(TAG, "Error accessing file: " + e.getMessage());
-                    }
-                    captureResult.setActivated(true);
-                }
-            };
-
-            mCamera.takePicture(null, null, mPicture);
-
-            return null;
-        }
-    }
-    */
-
 }

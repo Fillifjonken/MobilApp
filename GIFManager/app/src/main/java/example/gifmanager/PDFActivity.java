@@ -40,7 +40,7 @@ public class PDFActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
         // Create a document and set it's properties
         /**
          * Creating Document
@@ -183,6 +183,6 @@ public class PDFActivity extends Activity {
             e.printStackTrace();
         }
         document.close();
-
+        finish();
     }
 }
