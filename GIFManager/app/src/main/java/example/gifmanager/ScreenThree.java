@@ -88,9 +88,22 @@ public class ScreenThree extends MainActivity{
         String tempHTML = listHTML.get(index).toString();
         String[] parts = tempHTML.split("<td>");
         String temp2 = parts[4];
+        String test = parts[2];
+        //Split Time
+        String[] timeSplit = parts[3].split("<");
+        String time = timeSplit[0];
+        //Split group number
+        String[] groupSplit = parts[2].split(">");
+        String[] groupSplit2 = groupSplit[1].split("<");
+        String group = groupSplit2[0];
+        DataHolder.getInstance().setGroupCode(group);
+        // Split match Number
+        String[] nrSplit = parts[1].split(">");
+        String[] nrSplit2 = nrSplit[1].split("<");
+        String nr = nrSplit2[0];
+        DataHolder.getInstance().setNr(nr);
+        //Split team names and URL
         String[] parts2 = temp2.split("</a>");
-
-
         String[] teamOne = parts2[0].split(">");
         button.setText(teamOne[1]); //Set button text to teamname of hometeam
         DataHolder.getInstance().setTeam1Name(teamOne[1]);

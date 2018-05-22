@@ -7,7 +7,7 @@ public class DataHolder {
     private Date currentDate;
     private String adminCode;
     private String adminEmail;
-    private int Nr;
+    private String Nr;
     private String groupCode;
     private String team1Name;
     private String team2Name;
@@ -51,11 +51,11 @@ public class DataHolder {
         this.team2Members = team2Members;
     }
 
-    public int getNr() {
+    public String getNr() {
         return Nr;
     }
 
-    public void setNr(int nr) {
+    public void setNr(String nr) {
         Nr = nr;
     }
 
