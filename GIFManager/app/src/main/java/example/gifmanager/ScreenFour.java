@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -24,8 +26,9 @@ public class ScreenFour extends AppCompatActivity {
     String team = "Lag"; // or other values
     TextView teamName;
     Button mConfirm;
-    ArrayList<String> adapterBuffer;
-    ArrayAdapter playerAdapter;
+    private ArrayList<String> adapterBuffer;
+    private ArrayList<String> playerNames;
+    private ArrayAdapter playerAdapter;
     ListView player_list;
     private String urlPlayers;
 
@@ -34,6 +37,7 @@ public class ScreenFour extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         adapterBuffer = new ArrayList<String>();
+        playerNames = new ArrayList<String>();
         Bundle b = getIntent().getExtras();
         if(b != null)
             this.team = b.getString("key"); //Fetches the team from Intent
@@ -43,6 +47,16 @@ public class ScreenFour extends AppCompatActivity {
         teamName.setText(team);
         mConfirm = (Button) findViewById(R.id.confirm_button);
         player_list = (ListView) findViewById(R.id.players_list);
+        player_list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?>adapterView, View v, int pos, long id){
+
+                String item = ((TextView)v).getText().toString();
+                Toast.makeText(getBaseContext(), item + " tillagd i spelarlistan", Toast.LENGTH_LONG).show();
+                addPlayer(item);
+            }
+        });
         fetchUrl();
         checkSignatureFlag();
         new playerParcer().execute();
@@ -56,6 +70,11 @@ public class ScreenFour extends AppCompatActivity {
         }
     }
 
+    public void addPlayer(String player){
+        if(!playerNames.contains(player)){
+            playerNames.add(player);
+        }
+    }
 
     //Opens SignField activity with result request
     //(this enables updating the current activity after SignField has finished
