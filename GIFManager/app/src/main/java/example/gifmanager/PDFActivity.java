@@ -1,10 +1,8 @@
 package example.gifmanager;
 
 import android.app.Activity;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Environment;
-import android.widget.Toast;
 
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
@@ -22,15 +20,11 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.draw.LineSeparator;
 
-import org.w3c.dom.Document;
-
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
-import example.gifmanager.R;
+import java.util.ArrayList;
 
 public class PDFActivity extends Activity {
     private static String FILE = Environment.getExternalStorageDirectory()
@@ -48,9 +42,8 @@ public class PDFActivity extends Activity {
         com.itextpdf.text.Document document = new com.itextpdf.text.Document();
 
         // Location to save
-        File dest = new File(Environment.getExternalStorageDirectory(), "GIFManager");
-        File pdfFile = new File(dest + File.separator +
-                "DOC_"+ "result" + ".pdf");
+        File pdfFile = new File(DataHolder.getInstance().getReportPath());
+
         try {
             PdfWriter.getInstance(document, new FileOutputStream(pdfFile));
         } catch (DocumentException e) {
@@ -64,8 +57,8 @@ public class PDFActivity extends Activity {
         // Document Settings
         document.setPageSize(PageSize.A4);
         document.addCreationDate();
-        document.addAuthor("ASD");
-        document.addCreator("asd");
+        document.addAuthor(DataHolder.getInstance().getAdminCode());
+        document.addCreator(DataHolder.getInstance().getAdminCode());
 
         /***
          * Variables for further use....
@@ -105,18 +98,90 @@ public class PDFActivity extends Activity {
             e.printStackTrace();
         }
 
-        // Fields of Order Details..
-        // Adding Chunks for Title and value
-        /*
-        Font mOrderIdFont = new Font(urName, mHeadingFontSize, Font.NORMAL, mColorAccent);
-        Chunk mOrderIdChunk = new Chunk("Match report", mOrderIdFont);
-        Paragraph mOrderIdParagraph = new Paragraph(mOrderIdChunk);
         try {
-            document.add(mOrderIdParagraph);
+            document.add(new Chunk(" "));
         } catch (DocumentException e) {
             e.printStackTrace();
-        }*/
+        }
 
+        try {
+            Font registeredPlayersFont = new Font(urName, 24.0f, Font.NORMAL, BaseColor.BLACK);
+            Chunk registeredPlayersChunk = new Chunk("Registered Players", registeredPlayersFont);
+            // Creating Paragraph to add...
+            Paragraph registeredPlayersParagraph = new Paragraph(registeredPlayersChunk);
+            // Setting Alignment for Heading
+            registeredPlayersParagraph.setAlignment(Element.ALIGN_CENTER);
+            document.add(registeredPlayersParagraph);
+            //document.add(Chunk.NEWLINE);
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            document.add(createPlayerTable());
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            Font resultAndFairplayFont = new Font(urName, 24.0f, Font.NORMAL, BaseColor.BLACK);
+            Chunk rafChunk = new Chunk("Result and Fairplay", resultAndFairplayFont);
+            // Creating Paragraph to add...
+            Paragraph rafPar = new Paragraph(rafChunk);
+            // Setting Alignment for Heading
+            rafPar.setAlignment(Element.ALIGN_CENTER);
+            document.add(rafPar);
+            //document.add(Chunk.NEWLINE);
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            document.add(createResultAndFairplayTable());
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+
+        document.close();
+        finish();
+    }
+
+    public static PdfPTable createPlayerTable() throws DocumentException {
+        // a table with three columns
+        PdfPTable playerTable = new PdfPTable(2);
+        // the cell object
+        PdfPCell team1Cell;
+        PdfPCell team2Cell;
+        // we add a cell with colspan 3
+        team1Cell = new PdfPCell(new Phrase(DataHolder.getInstance().getTeam1Name()));
+        playerTable.addCell(team1Cell);
+        // now we add a cell with rowspan 2
+        team2Cell = new PdfPCell(new Phrase(DataHolder.getInstance().getTeam2Name()));
+        playerTable.addCell(team2Cell);
+
+        ArrayList<String> team1 = DataHolder.getInstance().getTeam1Members();
+        ArrayList<String> team2 = DataHolder.getInstance().getTeam2Members();
+
+        int maxLength = (team1.size() > team2.size())?team1.size():team2.size();
+
+        for(int i = 0; i < maxLength; i++){
+            if(team1.size() > i){
+                playerTable.addCell(team1.get(i));
+            }else {
+                playerTable.addCell("");
+            }
+
+            if (team2.size() > i){
+                playerTable.addCell(team2.get(i));
+            }else{
+                playerTable.addCell(" ");
+            }
+        }
+
+        return playerTable;
+    }
+
+    public static PdfPTable createResultAndFairplayTable() throws DocumentException {
         Image img = null;
         try {
             String imagePath = DataHolder.getInstance().getResultImagePath();
@@ -127,16 +192,6 @@ public class PDFActivity extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        /*
-        try {
-            document.add(new Paragraph("Result"));
-            img.scaleToFit(200, 300);
-            document.add(img);
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        }*/
-
 
         Image img2 = null;
         try {
@@ -149,15 +204,6 @@ public class PDFActivity extends Activity {
             e.printStackTrace();
         }
 
-        /*
-        try {
-            document.add(new Paragraph("Fairplay"));
-            img2.scaleToFit(200, 300);
-            document.add(img2);
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        }*/
-
         PdfPTable table = new PdfPTable(2);
         PdfPCell cell;
 
@@ -168,21 +214,10 @@ public class PDFActivity extends Activity {
         table.addCell(cell);
 
         cell = new PdfPCell(img);
-        //cell.setColspan(3);
         table.addCell(cell);
 
-        // now we add a cell with rowspan 2
         cell = new PdfPCell(img2);
-        //cell.setRowspan(2);
         table.addCell(cell);
-        // we add the four remaining cells with addCell()
-
-        try {
-            document.add(table);
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        }
-        document.close();
-        finish();
+        return table;
     }
 }

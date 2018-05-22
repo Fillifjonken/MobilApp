@@ -1,6 +1,10 @@
 package example.gifmanager;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,12 +13,29 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
+    private int requestCode;
+    private int grantResults[];
+    private int ASK_MULTIPLE_PERMISSION_REQUEST_CODE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+
+
+        // check storage and camera permission
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED ) {
+            //if you dont have required permissions ask for it (only required for API 23+)
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
+            onRequestPermissionsResult(requestCode, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, grantResults);
+        }
+
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED ) {
+            //if you dont have required permissions ask for it (only required for API 23+)
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, requestCode);
+            onRequestPermissionsResult(requestCode, new String[]{Manifest.permission.CAMERA}, grantResults);
+        }
 
         LinearLayout ll = new LinearLayout(this);
         final Intent intent = new Intent(this, ScreenFive.class);
@@ -36,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent2);
             }
         });
+
     }
 
     protected void onResume() {

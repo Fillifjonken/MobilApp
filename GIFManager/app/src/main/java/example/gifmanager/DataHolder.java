@@ -1,14 +1,14 @@
 package example.gifmanager;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class DataHolder {
-    private Date currentDate;
+    private String currentDate;
     private String adminCode;
     private String adminEmail;
-    private int Nr;
+    private String Nr;
     private String groupCode;
+    private String timeOfMatch;
     private String team1Name;
     private String team2Name;
     private ArrayList<String> team1Members;
@@ -47,11 +47,11 @@ public class DataHolder {
         this.team2Members = team2Members;
     }
 
-    public int getNr() {
+    public String getNr() {
         return Nr;
     }
 
-    public void setNr(int nr) {
+    public void setNr(String nr) {
         Nr = nr;
     }
 
@@ -95,15 +95,6 @@ public class DataHolder {
         this.fairplayImagePath = fairplayImagePath;
     }
 
-
-    public Date getCurrentDate() {
-        return currentDate;
-    }
-
-    public void setCurrentDate(Date currentDate) {
-        this.currentDate = currentDate;
-    }
-
     public String getReportPath() {
         return reportPath;
     }
@@ -137,5 +128,20 @@ public class DataHolder {
     }
 
 
+    public String getTimeOfMatch() {
+        return timeOfMatch;
+    }
+
+    public void setTimeOfMatch(String timeOfMatch) {
+        this.timeOfMatch = timeOfMatch;
+    }
+
+    public String getCurrentDate() {
+        return currentDate;
+    }
+
+    public void setCurrentDate(String currentDate) {
+        this.currentDate = currentDate;
+    }
 }
 

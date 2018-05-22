@@ -1,30 +1,22 @@
 package example.gifmanager;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
-import android.provider.ContactsContract;
 import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -37,17 +29,13 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
-import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO;
 
 public class ScreenFive extends MainActivity{
     private Camera mCamera;
     private CameraPreview mPreview;
+    private int cameraId;
     private static final String TAG = "ScreenFive";
     private static final int PERMISSION_REQUEST_CAMERA = 0;
     private static final int RESULT_CAPTURE = 0;
@@ -56,12 +44,8 @@ public class ScreenFive extends MainActivity{
     private static final int SHOW_PDF_CODE = 1;
     private static final int SEND_EMAIL_CODE = 2;
     private static int CAPTURE_MODE;
-    private Button captureResult;
-    private Button captureFairplay;
     private ImageView resultView;
     private ImageView fairplayView;
-    private int requestCode;
-    private int grantResults[];
     private Boolean cameraReady;
     private ProgressBar mProgressBar;
 
@@ -73,15 +57,10 @@ public class ScreenFive extends MainActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.screen_five);
 
-        // check storage permission
-        if(ContextCompat.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED ) {
-            //if you dont have required permissions ask for it (only required for API 23+)
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
-            onRequestPermissionsResult(requestCode, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, grantResults);
-        }
+
 
         cameraReady = false;
-        int cameraId = findBackFacingCamera();
+        cameraId = findBackFacingCamera();
         if (cameraId < 0) {
             Toast.makeText(this, "No front facing camera found.",
                     Toast.LENGTH_LONG).show();
@@ -94,9 +73,8 @@ public class ScreenFive extends MainActivity{
             mCamera.setParameters(params);
             mCamera.setDisplayOrientation(90);
         }
-        // Create an instance of Camera
-        //mCamera = getCameraInstance();
-        // Create our Preview view and set it as the content of our activity.
+
+
         mPreview = new CameraPreview(this, mCamera);
         final FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
         preview.addView(mPreview);
@@ -105,8 +83,8 @@ public class ScreenFive extends MainActivity{
         mProgressBar.setMax(100);
         mProgressBar.setVisibility(View.INVISIBLE);
 
-        captureResult = (Button) findViewById(R.id.scanResult);
-        captureFairplay = (Button) findViewById(R.id.scanFairplay);
+        Button captureResult = (Button) findViewById(R.id.scanResult);
+        Button captureFairplay = (Button) findViewById(R.id.scanFairplay);
 
         resultView = (ImageView) findViewById(R.id.resultView);
         fairplayView = (ImageView) findViewById(R.id.fairplayView);
@@ -122,14 +100,6 @@ public class ScreenFive extends MainActivity{
                     return;
                 }
 
-                if(Build.VERSION.SDK_INT>=24){
-                    try{
-                        Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposure");
-                        m.invoke(null);
-                    }catch(Exception e){
-                        e.printStackTrace();
-                    }
-                }
 
                 try {
                     ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -226,10 +196,21 @@ public class ScreenFive extends MainActivity{
         //get result from data, do something with it
 
         if(requestCode == GENERATE_PDF_CODE){
-            File dest = new File(Environment.getExternalStorageDirectory(), "GIFManager");
-            File pdfFile = new File(dest + File.separator +
-                    "DOC_"+ "result" + ".pdf");
+
+            if(Build.VERSION.SDK_INT>=24){
+                try{
+                    Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposure");
+                    m.invoke(null);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+            //File dest = new File(Environment.getExternalStorageDirectory(), "GIFManager");
+            //File pdfFile = new File(dest + File.separator +
+            //        "DOC_"+ "result" + ".pdf");
+            File pdfFile = new File(DataHolder.getInstance().getReportPath());
             final Intent showPDF = new Intent(Intent.ACTION_VIEW);
+            //showPDF.setDataAndType(Uri.fromFile(pdfFile), "application/pdf");
             showPDF.setDataAndType(Uri.fromFile(pdfFile), "application/pdf");
             showPDF.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             startActivityForResult(showPDF, SHOW_PDF_CODE);
@@ -241,14 +222,6 @@ public class ScreenFive extends MainActivity{
 
     }
 
-    protected void onResume() {
-        super.onResume();
-
-    }
-
-    protected void onPause() {
-        super.onPause();
-    }
 
     public void composeEmail(String[] addresses, String subject, Uri attachment) {
         Intent intent = new Intent(Intent.ACTION_SEND);
@@ -268,29 +241,7 @@ public class ScreenFive extends MainActivity{
                 bitmapSrc.getWidth(), bitmapSrc.getHeight(), matrix, true);
     }
 
-        /** Check if this device has a camera */
-    private boolean checkCameraHardware(Context context) {
-        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
-            // this device has a camera
-            return true;
-        } else {
-            // no camera on this device
-            return false;
-        }
-    }
 
-    /** A safe way to get an instance of the Camera object. */
-    public static Camera getCameraInstance(){
-        Camera c = null;
-
-        try {
-            c = Camera.open(); // attempt to get a Camera instance
-        }
-        catch (Exception e){
-            // Camera is not available (in use or does not exist)
-        }
-        return c; // returns null if camera is unavailable
-    }
 
     private int findBackFacingCamera() {
         int cameraId = -1;
@@ -334,15 +285,11 @@ public class ScreenFive extends MainActivity{
         }
 
         // Create a media file name
-        //String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String timeStamp = "result";
         File mediaFile;
         if (type == RESULT_CAPTURE){
-            mediaFile = new File(mediaStorageDir + File.separator +
-                    "IMG_"+ "result" + ".jpg");
+            mediaFile = new File(DataHolder.getInstance().getResultImagePath());
         } else if(type == FAIRPLAY_CAPTURE){
-            mediaFile = new File(mediaStorageDir + File.separator +
-                    "IMG_"+ "fairplay" + ".jpg");
+            mediaFile = new File(DataHolder.getInstance().getFairplayImagePath());
         } else{
             return null;
         }
@@ -379,13 +326,14 @@ public class ScreenFive extends MainActivity{
 
 
     public void loadDummyData(){
-        Date currentDate = new Date();
+        String currentDate = "20182205";
         String adminCode = "1337";
         String adminEmail = "awesomeAdmin@email.com";
-        int nr = 13;
+        String nr = "13";
         String groupCode = "A2";
         String team1Name = "Gammelstads IF";
         String team2Name = "Porsön IF";
+        String timeOfMatch = "13:37";
         ArrayList<String> team1Members = new ArrayList<>();
         ArrayList<String> team2Members = new ArrayList<>();
         String resultImagePath = Environment.getExternalStorageDirectory() + File.separator + "GIFManager" + File.separator + "IMG_result.jpg";
@@ -394,22 +342,27 @@ public class ScreenFive extends MainActivity{
         String team2SignaturePath = Environment.getExternalStorageDirectory() + File.separator + "GIFManager" + File.separator + "IMG_signature2.jpg";
         //String reportPath = Environment.getExternalStorageDirectory() + File.separator + "GIFManager" + File.separator + "DOC_result.pdf";
 
-        File dest = new File(Environment.getExternalStorageDirectory(), "GIFManager");
-        File pdfFile = new File(dest + File.separator +
-                "DOC_"+ "result" + ".pdf");
-        String reportPath = Uri.fromFile(pdfFile).toString();
-
+        //File dest = new File(Environment.getExternalStorageDirectory(), "GIFManager");
+        //File pdfFile = new File(dest + File.separator +
+        //        "MATCH_"+ nr + "-" + currentDate + "-" + timeOfMatch + "-" + groupCode + ".pdf");
+        //String reportPath = Uri.fromFile(pdfFile).toString();
+        String reportPath = Environment.getExternalStorageDirectory() + File.separator +
+                "GIFManager" + File.separator + "MATCH_"+ nr + "-" + currentDate + "-" +
+                timeOfMatch + "-" + groupCode + ".pdf";
 
         for(int i = 0; i < 15; i++){
             team1Members.add("Team1 member" + Integer.toString(i));
             team2Members.add("Team2 member" + Integer.toString(i));
         }
 
+        team1Members.remove(14);
+
         DataHolder.getInstance().setCurrentDate(currentDate);
         DataHolder.getInstance().setAdminCode(adminCode);
         DataHolder.getInstance().setAdminEmail(adminEmail);
         DataHolder.getInstance().setNr(nr);
         DataHolder.getInstance().setGroupCode(groupCode);
+        DataHolder.getInstance().setTimeOfMatch(timeOfMatch);
         DataHolder.getInstance().setTeam1Members(team1Members);
         DataHolder.getInstance().setTeam2Members(team2Members);
         DataHolder.getInstance().setTeam1Name(team1Name);
@@ -420,10 +373,12 @@ public class ScreenFive extends MainActivity{
         DataHolder.getInstance().setTeam2SignaturePath(team2SignaturePath);
         DataHolder.getInstance().setReportPath(reportPath);
     }
-/*
+
+    /*
     protected void onPause() {
         super.onPause();
         releaseCamera();              // release the camera immediately on pause event
+
     }
 
     private void releaseCamera(){
@@ -435,9 +390,11 @@ public class ScreenFive extends MainActivity{
 
     protected void onResume(){
         super.onResume();
-        mCamera.startPreview();
-    }
-*/
+        if (mCamera != null){
+            mCamera.startPreview();
+        }
+    } */
+
     /** A basic Camera preview class */
     public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
         private SurfaceHolder mHolder;
