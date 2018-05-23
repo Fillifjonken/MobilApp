@@ -2,6 +2,7 @@ package com.example.marcusjohansson.homeexam;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 import android.content.SharedPreferences;
 
@@ -9,6 +10,7 @@ public class FieldActivity extends AppCompatActivity {
 
     TextView txt1,txt2;
     DataHolder dh;
+    Button A11, B11, C17, C27, C35, C45, D7, E1, E2, E3, S1, S2, R1, R2, R3, R4, C25;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,5 +30,9 @@ public class FieldActivity extends AppCompatActivity {
         if (restoredText != null) {
             txt2.setText(String.valueOf(restoredText2));
         }*/
+    }
+
+    public void launchThree(){
+
     }
 }
