@@ -68,7 +68,7 @@ public class DataHolder {
     }
 
     public void setFieldNumber(String fieldNumber){
-        fieldNumber = fieldNumber;
+        this.fieldNumber = fieldNumber;
     }
 
     public String getTeam1Name() {
