@@ -9,6 +9,7 @@ public class DataHolder {
     private String adminEmail;
     private int Nr;
     private String groupCode;
+    private String fieldNumber;
     private String team1Name;
     private String team2Name;
     private ArrayList<String> team1Members;
@@ -60,6 +61,14 @@ public class DataHolder {
 
     public void setNr(int nr) {
         Nr = nr;
+    }
+
+    public String getFieldNumber(){
+        return fieldNumber;
+    }
+
+    public void setFieldNumber(String fieldNumber){
+        fieldNumber = fieldNumber;
     }
 
     public String getTeam1Name() {

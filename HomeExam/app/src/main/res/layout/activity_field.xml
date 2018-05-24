@@ -47,6 +47,7 @@
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
+                    android:onClick="launchThree"
                     android:src="@drawable/soccera11" />
 
 
@@ -75,6 +76,7 @@
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
+                    android:onClick="launchThree"
                     android:src="@drawable/soccerb11" />
 
 
@@ -98,28 +100,31 @@
                 >
 
                 <ImageButton
-                    android:id="@+id/bC1-7"
+                    android:id="@+id/bC17"
                     android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
+                    android:onClick="launchThree"
                     android:src="@drawable/soccerc17" />
 
 
                 <ImageButton
-                    android:id="@+id/bC2-7"
+                    android:id="@+id/bC27"
                     android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
+                    android:onClick="launchThree"
                     android:src="@drawable/soccerc27" />
 
                 <ImageButton
-                    android:id="@+id/bC3-5"
+                    android:id="@+id/bC35"
                     android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
+                    android:onClick="launchThree"
                     android:src="@drawable/soccerc35" />
 
 
@@ -131,11 +136,12 @@
                 >
 
                 <ImageButton
-                    android:id="@+id/bC4-5"
+                    android:id="@+id/bC45"
                     android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
+                    android:onClick="launchThree"
                     android:src="@drawable/soccerc45" />
             </LinearLayout>
             <LinearLayout
@@ -161,6 +167,7 @@
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
+                    android:onClick="launchThree"
                     android:src="@drawable/soccerd7" />
 
 
@@ -188,6 +195,7 @@
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
+                    android:onClick="launchThree"
                     android:src="@drawable/soccere1" />
                 <ImageButton
                     android:id="@+id/bE2"
@@ -195,6 +203,7 @@
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
+                    android:onClick="launchThree"
                     android:src="@drawable/soccere2" />
                 <ImageButton
                     android:id="@+id/bE3"
@@ -202,40 +211,8 @@
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
+                    android:onClick="launchThree"
                     android:src="@drawable/soccere3" />
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="50dp"
-                    android:text="S"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                >
-
-                <ImageButton
-                    android:id="@+id/bS1"
-                    android:layout_width="100dp"
-                    android:layout_height="80dp"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/soccers1" />
-                <ImageButton
-                    android:id="@+id/bS2"
-                    android:layout_width="100dp"
-                    android:layout_height="80dp"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/soccers2" />
 
             </LinearLayout>
             <LinearLayout
@@ -261,6 +238,7 @@
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
+                    android:onClick="launchThree"
                     android:src="@drawable/soccerr1" />
                 <ImageButton
                     android:id="@+id/bR2"
@@ -268,6 +246,7 @@
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
+                    android:onClick="launchThree"
                     android:src="@drawable/soccerr2" />
                 <ImageButton
                     android:id="@+id/bR3"
@@ -275,6 +254,7 @@
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
+                    android:onClick="launchThree"
                     android:src="@drawable/soccerr3" />
 
             </LinearLayout>
@@ -290,16 +270,36 @@
                 android:layout_height="80dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
+                android:onClick="launchThree"
                 android:src="@drawable/soccerr4" />
 
-            <Button
-                android:id="@+id/bC2-5"
-                android:layout_width="100dp"
-                android:layout_height="80dp"
-                android:layout_margin="10dp"
-                android:text="C2-5"/>
         </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="50dp"
+                    android:text="S"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                >
+
+                <ImageButton
+                    android:id="@+id/bS1"
+                    android:layout_width="100dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:onClick="launchThree"
+                    android:src="@drawable/soccers1" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
