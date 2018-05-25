@@ -49,6 +49,7 @@
                     android:layout_weight="1"
                     android:onClick="launchThree"
                     android:background="@drawable/button_back"
+                    android:textSize="25sp"
                     android:text="A11" />
 
 
@@ -71,14 +72,16 @@
                 android:layout_weight="3"
                 >
 
-                <ImageButton
+                <Button
                     android:id="@+id/bB11"
                     android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:onClick="launchThree"
-                    android:src="@drawable/soccerb11" />
+                    android:background="@drawable/button_back"
+                    android:textSize="25sp"
+                    android:text="B11" />
 
 
 
@@ -100,33 +103,39 @@
                 android:layout_weight="3"
                 >
 
-                <ImageButton
+                <Button
                     android:id="@+id/bC17"
                     android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:onClick="launchThree"
-                    android:src="@drawable/soccerc17" />
+                    android:background="@drawable/button_back"
+                    android:textSize="25sp"
+                    android:text="C1-7" />
 
 
-                <ImageButton
+                <Button
                     android:id="@+id/bC27"
                     android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:onClick="launchThree"
-                    android:src="@drawable/soccerc27" />
+                    android:background="@drawable/button_back"
+                    android:textSize="25sp"
+                    android:text="C2-7" />
 
-                <ImageButton
+                <Button
                     android:id="@+id/bC35"
                     android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:onClick="launchThree"
-                    android:src="@drawable/soccerc35" />
+                    android:background="@drawable/button_back"
+                    android:textSize="25sp"
+                    android:text="C3-5" />
 
 
             </LinearLayout>
@@ -136,14 +145,16 @@
                 android:layout_weight="3"
                 >
 
-                <ImageButton
+                <Button
                     android:id="@+id/bC45"
                     android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:onClick="launchThree"
-                    android:src="@drawable/soccerc45" />
+                    android:background="@drawable/button_back"
+                    android:textSize="25sp"
+                    android:text="C4-5" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -162,14 +173,16 @@
                 android:layout_weight="3"
                 >
 
-                <ImageButton
+                <Button
                     android:id="@+id/bD7"
                     android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:onClick="launchThree"
-                    android:src="@drawable/soccerd7" />
+                    android:background="@drawable/button_back"
+                    android:textSize="25sp"
+                    android:text="D-7" />
 
 
             </LinearLayout>
@@ -190,30 +203,36 @@
                 android:layout_weight="3"
                 >
 
-                <ImageButton
+                <Button
                     android:id="@+id/bE1"
                     android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:onClick="launchThree"
-                    android:src="@drawable/soccere1" />
-                <ImageButton
+                    android:background="@drawable/button_back"
+                    android:textSize="25sp"
+                    android:text="E1" />
+                <Button
                     android:id="@+id/bE2"
                     android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:onClick="launchThree"
-                    android:src="@drawable/soccere2" />
-                <ImageButton
+                    android:background="@drawable/button_back"
+                    android:textSize="25sp"
+                    android:text="E2" />
+                <Button
                     android:id="@+id/bE3"
                     android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:onClick="launchThree"
-                    android:src="@drawable/soccere3" />
+                    android:background="@drawable/button_back"
+                    android:textSize="25sp"
+                    android:text="E3" />
 
             </LinearLayout>
             <LinearLayout
@@ -233,30 +252,36 @@
                 android:layout_weight="3"
                 >
 
-                <ImageButton
+                <Button
                     android:id="@+id/bR1"
                     android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:onClick="launchThree"
-                    android:src="@drawable/soccerr1" />
-                <ImageButton
+                    android:background="@drawable/button_back"
+                    android:textSize="25sp"
+                    android:text="R1" />
+                <Button
                     android:id="@+id/bR2"
                     android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:onClick="launchThree"
-                    android:src="@drawable/soccerr2" />
-                <ImageButton
+                    android:background="@drawable/button_back"
+                    android:textSize="25sp"
+                    android:text="R2" />
+                <Button
                     android:id="@+id/bR3"
                     android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:onClick="launchThree"
-                    android:src="@drawable/soccerr3" />
+                    android:background="@drawable/button_back"
+                    android:textSize="25sp"
+                    android:text="R3" />
 
             </LinearLayout>
             <LinearLayout
@@ -265,14 +290,16 @@
                 android:layout_weight="3"
                 >
 
-                <ImageButton
+                <Button
                     android:id="@+id/bR4"
                     android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:onClick="launchThree"
-                    android:src="@drawable/soccerr4" />
+                    android:background="@drawable/button_back"
+                    android:textSize="25sp"
+                    android:text="R4" />
 
             </LinearLayout>
             <LinearLayout
@@ -292,14 +319,16 @@
                 android:layout_weight="3"
                 >
 
-                <ImageButton
+                <Button
                     android:id="@+id/bS1"
                     android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:onClick="launchThree"
-                    android:src="@drawable/soccers1" />
+                    android:background="@drawable/button_back"
+                    android:textSize="25sp"
+                    android:text="S1" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

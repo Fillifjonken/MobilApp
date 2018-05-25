@@ -15,7 +15,7 @@ public class FieldActivity extends AppCompatActivity {
 
     TextView txt1,txt2;
     DataHolder dh;
-    ImageButton A11, B11, C17, C27, C35, C45, D7, E1, E2, E3, S1, R1, R2, R3, R4;
+    Button A11, B11, C17, C27, C35, C45, D7, E1, E2, E3, S1, R1, R2, R3, R4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,20 +29,20 @@ public class FieldActivity extends AppCompatActivity {
 
         //Assigns all field-buttons to a variable each
         //A11 = (ImageButton) findViewById(R.id.bA11);
-        B11 = (ImageButton) findViewById(R.id.bB11);
-        C17 = (ImageButton) findViewById(R.id.bC17);
-        C27 = (ImageButton) findViewById(R.id.bC27);
-        C35 = (ImageButton) findViewById(R.id.bC35);
-        C45 = (ImageButton) findViewById(R.id.bC45);
-        D7 = (ImageButton) findViewById(R.id.bD7);
-        E1 = (ImageButton) findViewById(R.id.bE1);
-        E2 = (ImageButton) findViewById(R.id.bE2);
-        E3 = (ImageButton) findViewById(R.id.bE3);
-        S1 = (ImageButton) findViewById(R.id.bS1);
-        R1 = (ImageButton) findViewById(R.id.bR1);
-        R2 = (ImageButton) findViewById(R.id.bR2);
-        R3 = (ImageButton) findViewById(R.id.bR3);
-        R4 = (ImageButton) findViewById(R.id.bR4);
+        B11 = (Button) findViewById(R.id.bB11);
+        C17 = (Button) findViewById(R.id.bC17);
+        C27 = (Button) findViewById(R.id.bC27);
+        C35 = (Button) findViewById(R.id.bC35);
+        C45 = (Button) findViewById(R.id.bC45);
+        D7 = (Button) findViewById(R.id.bD7);
+        E1 = (Button) findViewById(R.id.bE1);
+        E2 = (Button) findViewById(R.id.bE2);
+        E3 = (Button) findViewById(R.id.bE3);
+        S1 = (Button) findViewById(R.id.bS1);
+        R1 = (Button) findViewById(R.id.bR1);
+        R2 = (Button) findViewById(R.id.bR2);
+        R3 = (Button) findViewById(R.id.bR3);
+        R4 = (Button) findViewById(R.id.bR4);
 
         /*String restoredText = this.dh.getAdminEmail();
         String restoredText2 = this.dh.getAdminCode();
