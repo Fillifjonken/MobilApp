@@ -41,14 +41,15 @@
                 android:layout_weight="3"
                 >
 
-                <ImageButton
+                <Button
                     android:id="@+id/bA11"
                     android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:onClick="launchThree"
-                    android:src="@drawable/soccera11" />
+                    android:background="@drawable/button_back"
+                    android:text="A11" />
 
 
             </LinearLayout>

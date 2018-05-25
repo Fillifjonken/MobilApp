@@ -28,7 +28,7 @@ public class FieldActivity extends AppCompatActivity {
         //txt2 =  findViewById(R.id.B);
 
         //Assigns all field-buttons to a variable each
-        A11 = (ImageButton) findViewById(R.id.bA11);
+        //A11 = (ImageButton) findViewById(R.id.bA11);
         B11 = (ImageButton) findViewById(R.id.bB11);
         C17 = (ImageButton) findViewById(R.id.bC17);
         C27 = (ImageButton) findViewById(R.id.bC27);
