@@ -24,6 +24,7 @@ public class DataHolder {
     private String team2SignaturePath;
     private String reportPath;
     private int activeTeam;
+    private String parceUrl;
 
     private static final DataHolder holder = new DataHolder();
     public static DataHolder getInstance() {return holder;}
@@ -178,5 +179,12 @@ public class DataHolder {
     }
     public int getActiveTeam(){
         return activeTeam;
+    }
+    public void setParceUrl(){
+        this.parceUrl = "http://teamplaycup.se/cup/?games&home=kurirenspelen/"+currentDate+"&scope=all&arena="+fieldNumber+"&field=";
+    }
+    public String getParceUrl(){
+        return parceUrl;
+
     }
 }

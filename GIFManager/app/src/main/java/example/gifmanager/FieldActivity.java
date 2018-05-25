@@ -58,7 +58,7 @@ public class FieldActivity extends AppCompatActivity {
         String field = "A0";
 
         //Checks which button that was pressed
-        if(v == A11){field = "A%2011";}
+        if(v == A11){field = "A%2011-manna%20(Gstad)";}
         else if(v == B11){field = "B%2011-manna&20(Gstad)";}
         else if(v == C17){field = "C1%207-manna&20(Gstad)";}
         else if(v == C27){field = "C2%207-manna&20(Gstad)";}
@@ -76,6 +76,7 @@ public class FieldActivity extends AppCompatActivity {
 
         //Stores the corresponding fieldname in DataHolder
         DataHolder.getInstance().setFieldNumber(field);
+        DataHolder.getInstance().setParceUrl();
         Toast.makeText(getApplicationContext(), field , Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(getApplicationContext(), ScreenThree.class);

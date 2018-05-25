@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class ScreenOne extends AppCompatActivity {
 
@@ -27,15 +28,16 @@ public class ScreenOne extends AppCompatActivity {
     EditText email1,email2,p1,p2,date1;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_screen_one);
 
         this.dh = new DataHolder().getInstance();
 
-        date1 = (EditText) findViewById(R.id.date);
+        this.date1 = (EditText) findViewById(R.id.date);
         email1 = (EditText) findViewById(R.id.input_email1);
         email2 = (EditText) findViewById(R.id.input_email2);
         p1 = (EditText) findViewById(R.id.input_password1);
@@ -46,8 +48,8 @@ public class ScreenOne extends AppCompatActivity {
         //Set date-----------------
         dDate = Calendar.getInstance().getTime();
 
-        SimpleDateFormat n = new SimpleDateFormat("yyyy-MM-dd");
-        sDate = n.format(dDate);
+        SimpleDateFormat n = new SimpleDateFormat("yy");
+        sDate = n.format(dDate).toString();
         date1.setText(sDate); //Här krashar det
         //---------------
 
@@ -115,7 +117,7 @@ public class ScreenOne extends AppCompatActivity {
         //Set variables
         this.dh.setAdminCode(this.pass);
         this.dh.setAdminEmail(email);
-        this.dh.setCurrentDate(this.sDate);
+        this.dh.setCurrentDate("17");
 
         SharedPreferences preferences = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
