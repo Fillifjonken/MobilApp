@@ -13,6 +13,13 @@
         android:layout_height="190dp" />
     -->
 
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/gif_logo_2"/>
+
     <FrameLayout
         android:id="@+id/camera_preview"
         android:layout_width="fill_parent"
@@ -26,7 +33,9 @@
         android:background="@android:color/background_light"
         android:text="Report results for match"
         android:textAlignment="center"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:textColor="@color/colorPrimaryDark"
+        />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -53,13 +62,15 @@
                 android:id="@+id/scanResult"
                 android:layout_width="176dp"
                 android:layout_height="match_parent"
-                android:text="Scan results" />
+                android:text="Scan results"
+                android:background="@drawable/button_back"/>
 
             <Button
                 android:id="@+id/scanFairplay"
                 android:layout_width="180dp"
                 android:layout_height="match_parent"
-                android:text="Scan Fairplay" />
+                android:text="Scan Fairplay"
+                android:background="@drawable/button_back"/>
         </TableRow>
 
         <TableRow
@@ -95,13 +106,15 @@
                 android:id="@+id/generate"
                 android:layout_width="176dp"
                 android:layout_height="58dp"
-                android:text="Generate report" />
+                android:text="Generate report"
+                android:background="@drawable/button_back"/>
 
             <Button
                 android:id="@+id/finalize"
                 android:layout_width="176dp"
                 android:layout_height="58dp"
-                android:text="Send Report" />
+                android:text="Send Report"
+                android:background="@drawable/button_back"/>
         </TableRow>
 
     </TableLayout>

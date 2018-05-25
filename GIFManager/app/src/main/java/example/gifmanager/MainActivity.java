@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         LinearLayout ll = new LinearLayout(this);
         final Intent openScreenFive = new Intent(this, ScreenFive.class);
-        Button button = (Button) findViewById(R.id.button);
+       /* Button button = (Button) findViewById(R.id.button);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(openScreenFive);
             }
         });
-
-        Button button3;
+*/
+        Button button3, button2;
         button3 = (Button)findViewById(R.id.button3);
         button3.setOnClickListener(new View.OnClickListener(){
 
@@ -57,8 +57,20 @@ public class MainActivity extends AppCompatActivity {
                 launch();
             }
         });
+       /* button2 = (Button)findViewById(R.id.button2);
+        button2.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+                launch2();
+            }
+        });*/
     }
     public void launch(){
+        Intent intent = new Intent(this, ScreenOne.class);
+        startActivity(intent);
+    }
+    public void launch2(){
         Intent intent = new Intent(this, ScreenThree.class);
         startActivity(intent);
     }

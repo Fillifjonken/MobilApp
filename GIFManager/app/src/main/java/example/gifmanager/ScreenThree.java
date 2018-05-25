@@ -134,11 +134,15 @@ public class ScreenThree extends MainActivity{
 
     public class urlParcer extends AsyncTask<Void, Void, Void> {
 
+        public String temp = DataHolder.getInstance().getCurrentDate();
+        public String temp2 = DataHolder.getInstance().getFieldNumber();
+        public String temp3 = DataHolder.getInstance().getParceUrl();
+        public String temp4 = "http://teamplaycup.se/cup/?games&home=kurirenspelen/"+temp+"&scope=all&arena="+temp2+"&field=";
         protected Void doInBackground(Void... params) {
 
 
             try {
-                Document doc = Jsoup.connect(tempUrlGames).maxBodySize(0).get();
+                Document doc = Jsoup.connect(DataHolder.getInstance().getParceUrl()).maxBodySize(0).get();
                 Elements ele = doc.select("div.content div.table-responsive table.table-condensed");
 
                 for(Element element: ele){

@@ -54,7 +54,7 @@ public class ScreenFour extends AppCompatActivity {
             public void onItemClick(AdapterView<?>adapterView, View v, int pos, long id){
 
                 String item = ((TextView)v).getText().toString();
-                Toast.makeText(getBaseContext(), item + " tillagd i spelarlistan", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), item + " tillagd i spelarlistan", Toast.LENGTH_SHORT).show();
                 addPlayer(item);
             }
         });

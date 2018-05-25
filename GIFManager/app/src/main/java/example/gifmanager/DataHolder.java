@@ -1,6 +1,7 @@
 package example.gifmanager;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DataHolder {
 
@@ -10,6 +11,7 @@ public class DataHolder {
     private String Nr;
     private String groupCode;
     private String timeOfMatch;
+    private String fieldNumber;
     private String team1Name;
     private String team2Name;
     private String team1Url;
@@ -22,6 +24,7 @@ public class DataHolder {
     private String team2SignaturePath;
     private String reportPath;
     private int activeTeam;
+    private String parceUrl;
 
     private static final DataHolder holder = new DataHolder();
     public static DataHolder getInstance() {return holder;}
@@ -56,6 +59,14 @@ public class DataHolder {
 
     public void setNr(String nr) {
         Nr = nr;
+    }
+
+    public String getFieldNumber(){
+        return fieldNumber;
+    }
+
+    public void setFieldNumber(String fieldNumber){
+        this.fieldNumber = fieldNumber;
     }
 
     public String getTeam1Name() {
@@ -168,5 +179,12 @@ public class DataHolder {
     }
     public int getActiveTeam(){
         return activeTeam;
+    }
+    public void setParceUrl(){
+        this.parceUrl = "http://teamplaycup.se/cup/?games&home=kurirenspelen/"+currentDate+"&scope=all&arena="+fieldNumber+"&field=";
+    }
+    public String getParceUrl(){
+        return parceUrl;
+
     }
 }
