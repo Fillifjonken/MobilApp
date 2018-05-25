@@ -29,6 +29,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScreenFive extends MainActivity{
@@ -347,12 +348,17 @@ public class ScreenFive extends MainActivity{
         //String team1Name = "Gammelstads IF";
         //String team2Name = "Porsön IF";
         //String timeOfMatch = "13:37";
-        //ArrayList<String> team1Members = new ArrayList<>();
-        //ArrayList<String> team2Members = new ArrayList<>();
-        String resultImagePath = Environment.getExternalStorageDirectory() + File.separator + "GIFManager" + File.separator + "IMG_result.jpg";
-        String fairplayImagePath = Environment.getExternalStorageDirectory() + File.separator + "GIFManager" + File.separator + "IMG_fairplay.jpg";
-        String team1SignaturePath = Environment.getExternalStorageDirectory() + File.separator + "GIFManager" + File.separator + "IMG_signature1.jpg";
-        String team2SignaturePath = Environment.getExternalStorageDirectory() + File.separator + "GIFManager" + File.separator + "IMG_signature2.jpg";
+        ArrayList<String> team1Members = new ArrayList<>();
+        ArrayList<String> team2Members = new ArrayList<>();
+        String resultImagePath = Environment.getExternalStorageDirectory() + File.separator +
+                "GIFManager" + File.separator + "IMG_result.jpg";
+        String fairplayImagePath = Environment.getExternalStorageDirectory() + File.separator +
+                "GIFManager" + File.separator + "IMG_fairplay.jpg";
+        String team1SignaturePath = Environment.getExternalStorageDirectory() + File.separator +
+                "GIFManager" + File.separator + "Signatures" + File.separator + "signature_home.png";
+        String team2SignaturePath = Environment.getExternalStorageDirectory() + File.separator +
+                "GIFManager" + File.separator + "Signatures" + File.separator + "signature_visit.png";
+
         //String reportPath = Environment.getExternalStorageDirectory() + File.separator + "GIFManager" + File.separator + "DOC_result.pdf";
 
         //File dest = new File(Environment.getExternalStorageDirectory(), "GIFManager");
@@ -360,14 +366,14 @@ public class ScreenFive extends MainActivity{
         //        "MATCH_"+ nr + "-" + currentDate + "-" + timeOfMatch + "-" + groupCode + ".pdf");
         //String reportPath = Uri.fromFile(pdfFile).toString();
 
-        /*
+
         for(int i = 0; i < 15; i++){
             team1Members.add("Team1 member" + Integer.toString(i));
             team2Members.add("Team2 member" + Integer.toString(i));
         }
 
         team1Members.remove(14);
-         */
+
         DataHolder.getInstance().setCurrentDate(currentDate);
         DataHolder.getInstance().setAdminCode(adminCode);
         DataHolder.getInstance().setAdminEmail(adminEmail);

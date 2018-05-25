@@ -124,6 +124,13 @@ public class PDFActivity extends Activity {
         }
 
         try {
+            document.add(new Chunk(" "));
+            document.add(signatureTable());
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+
+        try {
             Font resultAndFairplayFont = new Font(urName, 24.0f, Font.NORMAL, BaseColor.BLACK);
             Chunk rafChunk = new Chunk("Result and Fairplay", resultAndFairplayFont);
             // Creating Paragraph to add...
@@ -211,6 +218,48 @@ public class PDFActivity extends Activity {
         table.addCell(cell);
 
         cell = new PdfPCell(new Paragraph("Fairplay"));
+        table.addCell(cell);
+
+        cell = new PdfPCell(img);
+        table.addCell(cell);
+
+        cell = new PdfPCell(img2);
+        table.addCell(cell);
+        return table;
+    }
+
+    public static PdfPTable signatureTable() throws DocumentException {
+        Image img = null;
+        try {
+            String imagePath = DataHolder.getInstance().getTeam1SignaturePath();
+            img = Image.getInstance(imagePath);
+            img.scaleToFit(200, 180);
+        } catch (BadElementException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Image img2 = null;
+        try {
+            String imagePath = DataHolder.getInstance().getTeam2SignaturePath();
+            img2 = Image.getInstance(imagePath);
+            img2.scaleToFit(200, 180);
+        } catch (BadElementException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        PdfPTable table = new PdfPTable(2);
+        PdfPCell cell;
+
+        cell = new PdfPCell(new Paragraph(DataHolder.getInstance().getTeam1Name() +
+                " trainer signature"));
+        table.addCell(cell);
+
+        cell = new PdfPCell(new Paragraph(DataHolder.getInstance().getTeam2Name() +
+        " trainer signature"));
         table.addCell(cell);
 
         cell = new PdfPCell(img);
