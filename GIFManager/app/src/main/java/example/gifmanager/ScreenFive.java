@@ -48,6 +48,8 @@ public class ScreenFive extends MainActivity{
     private ImageView fairplayView;
     private Boolean cameraReady;
     private ProgressBar mProgressBar;
+    private Button mFinalize;
+    private Boolean reportGenerated = false;
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -163,32 +165,40 @@ public class ScreenFive extends MainActivity{
 
         cameraReady = true;
 
-        Button mFinalize = (Button) findViewById(R.id.finalize);
+        mFinalize = (Button) findViewById(R.id.finalize);
 
-        final Intent gereratePDF = new Intent(this, PDFActivity.class);
-
-
-        loadDummyData(); //Remove for final version
+        final Intent generatePDF = new Intent(this, PDFActivity.class);
 
 
         mFinalize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String[] sendTo = new String[1];
-                sendTo[0] = DataHolder.getInstance().getAdminEmail();
-                StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-                StrictMode.setVmPolicy(builder.build());
-                Uri reportUri = Uri.parse(DataHolder.getInstance().getReportPath());
-                composeEmail(sendTo, "Match Report", reportUri);
+                if(reportGenerated){
+                    String[] sendTo = new String[1];
+                    sendTo[0] = DataHolder.getInstance().getAdminEmail();
+                    StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+                    StrictMode.setVmPolicy(builder.build());
+                    Uri reportUri = Uri.parse("file://" + DataHolder.getInstance().getReportPath());
+                    composeEmail(sendTo, "Match Report", reportUri);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Generate report before sending email",
+                            Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
+
+        mFinalize.setActivated(false);
 
         Button mGenerate = (Button) findViewById(R.id.generate);
         mGenerate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 DataHolder.getInstance().setReportPath(getReportPath());
-                startActivityForResult(gereratePDF, GENERATE_PDF_CODE);
+                startActivityForResult(generatePDF, GENERATE_PDF_CODE);
+
+
             }
         });
     }
@@ -216,11 +226,10 @@ public class ScreenFive extends MainActivity{
             showPDF.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             startActivityForResult(showPDF, SHOW_PDF_CODE);
         }else if(requestCode == SHOW_PDF_CODE){
-
+            reportGenerated = true;
         }else{
             //finish();
         }
-
     }
 
 
@@ -338,7 +347,6 @@ public class ScreenFive extends MainActivity{
         }
     }
 
-
     public void loadDummyData(){
         String currentDate = "20182205";
         String adminCode = "1337";
@@ -390,27 +398,6 @@ public class ScreenFive extends MainActivity{
         DataHolder.getInstance().setTeam2SignaturePath(team2SignaturePath);
         //DataHolder.getInstance().setReportPath(reportPath);
     }
-
-    /*
-    protected void onPause() {
-        super.onPause();
-        releaseCamera();              // release the camera immediately on pause event
-
-    }
-
-    private void releaseCamera(){
-        if (mCamera != null){
-            mCamera.release();        // release the camera for other applications
-            mCamera = null;
-        }
-    }
-
-    protected void onResume(){
-        super.onResume();
-        if (mCamera != null){
-            mCamera.startPreview();
-        }
-    } */
 
     /** A basic Camera preview class */
     public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {

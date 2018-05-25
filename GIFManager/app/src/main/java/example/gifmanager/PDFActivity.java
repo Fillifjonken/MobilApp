@@ -169,6 +169,13 @@ public class PDFActivity extends Activity {
         ArrayList<String> team1 = DataHolder.getInstance().getTeam1Members();
         ArrayList<String> team2 = DataHolder.getInstance().getTeam2Members();
 
+        if(team1.isEmpty()){
+            team1.add("No players registered");
+        }
+        if(team2.isEmpty()){
+            team2.add("No players registered");
+        }
+
         int maxLength = (team1.size() > team2.size())?team1.size():team2.size();
 
         for(int i = 0; i < maxLength; i++){
@@ -184,6 +191,7 @@ public class PDFActivity extends Activity {
                 playerTable.addCell(" ");
             }
         }
+
 
         return playerTable;
     }

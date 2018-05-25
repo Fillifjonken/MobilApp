@@ -1,20 +1,20 @@
 package example.gifmanager;
 
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Calendar;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ScreenOne extends AppCompatActivity {
 
@@ -35,7 +35,8 @@ public class ScreenOne extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_one);
 
-        this.dh = new DataHolder().getInstance();
+        this.dh = DataHolder.getInstance();
+        dh.initDataHolder();
 
         this.date1 = (EditText) findViewById(R.id.date);
         email1 = (EditText) findViewById(R.id.input_email1);

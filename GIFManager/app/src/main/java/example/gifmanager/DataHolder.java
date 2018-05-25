@@ -1,7 +1,9 @@
 package example.gifmanager;
 
+import android.os.Environment;
+
+import java.io.File;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class DataHolder {
 
@@ -185,6 +187,34 @@ public class DataHolder {
     }
     public String getParceUrl(){
         return parceUrl;
+    }
 
+    // initialized variables and sets default values
+    public void initDataHolder(){
+
+        this.currentDate = "";
+        this.adminCode = "";
+        this.adminEmail = "";
+        this.Nr = "";
+        this.groupCode = "";
+        this.timeOfMatch = "";
+        this.fieldNumber = "";
+        this.team1Name = "";
+        this.team2Name = "";
+        this.team1Url = "";
+        this.team2Url = "";
+        this.team1Members = new ArrayList<>();
+        this.team2Members = new ArrayList<>();
+        this.resultImagePath = Environment.getExternalStorageDirectory() + File.separator +
+                "GIFManager" + File.separator + "IMG_result.jpg";
+        this.fairplayImagePath = Environment.getExternalStorageDirectory() + File.separator +
+                "GIFManager" + File.separator + "IMG_fairplay.jpg";
+        this.team1SignaturePath = Environment.getExternalStorageDirectory() + File.separator +
+                "GIFManager" + File.separator + "Signatures" + File.separator + "signature_home.png";
+        this.team2SignaturePath = Environment.getExternalStorageDirectory() + File.separator +
+                "GIFManager" + File.separator + "Signatures" + File.separator + "signature_visit.png";
+        this.reportPath = "";
+        this.activeTeam = 0;
+        this.parceUrl = "";
     }
 }
