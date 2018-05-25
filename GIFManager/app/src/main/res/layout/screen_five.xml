@@ -34,6 +34,7 @@
         android:text="Report results for match"
         android:textAlignment="center"
         android:textSize="30sp"
+        android:textColor="@color/colorPrimaryDark"
         />
 
     <ProgressBar
@@ -105,13 +106,15 @@
                 android:id="@+id/generate"
                 android:layout_width="176dp"
                 android:layout_height="58dp"
-                android:text="Generate report" />
+                android:text="Generate report"
+                android:background="@drawable/button_back"/>
 
             <Button
                 android:id="@+id/finalize"
                 android:layout_width="176dp"
                 android:layout_height="58dp"
-                android:text="Send Report" />
+                android:text="Send Report"
+                android:background="@drawable/button_back"/>
         </TableRow>
 
     </TableLayout>
