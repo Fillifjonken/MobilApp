@@ -117,7 +117,7 @@ public class ScreenOne extends AppCompatActivity {
         //Set variables
         this.dh.setAdminCode(this.pass);
         this.dh.setAdminEmail(email);
-        this.dh.setCurrentDate("17");
+        this.dh.setCurrentDate(this.date1.getText().toString());
 
         SharedPreferences preferences = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
