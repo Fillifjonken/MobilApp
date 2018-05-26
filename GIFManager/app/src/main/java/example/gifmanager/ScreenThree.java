@@ -76,7 +76,7 @@ public class ScreenThree extends MainActivity{
     public void openScreenFourTeam1(View view){
         Intent intent = new Intent(getApplicationContext(), ScreenFour.class);
         Bundle b = new Bundle(); //Creates new bundle for intent
-        b.putString("key", "HomeTeam"); //puts String into bundle with ID
+        b.putString("key", "Hemmalag"); //puts String into bundle with ID
         intent.putExtras(b);    //Puts the bundle as extra content for the Intent
         DataHolder.getInstance().setActiveTeam(1);
         startActivity(intent);
@@ -84,7 +84,7 @@ public class ScreenThree extends MainActivity{
     public void openScreenFourTeam2(View view){
         Intent intent = new Intent(getApplicationContext(), ScreenFour.class);
         Bundle b = new Bundle();    //Creates new bundle for intent
-        b.putString("key", "VisitTeam");    //puts String into bundle with ID
+        b.putString("key", "Bortalag");    //puts String into bundle with ID
         intent.putExtras(b);    //Puts the bundle as extra content for the Intent
         DataHolder.getInstance().setActiveTeam(2);
         startActivity(intent);

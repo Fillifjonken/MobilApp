@@ -55,7 +55,7 @@ public class FieldActivity extends AppCompatActivity {
     }
 
     public void launchThree(View v){
-        String field = "A0";
+        String field = "No Field";
 
         //Checks which button that was pressed
         if(v == A11){field = "A%2011-manna%20(Gstad)";}
@@ -77,7 +77,7 @@ public class FieldActivity extends AppCompatActivity {
         //Stores the corresponding fieldname in DataHolder
         DataHolder.getInstance().setFieldNumber(field);
         DataHolder.getInstance().setParceUrl();
-        Toast.makeText(getApplicationContext(), field , Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), field , Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(getApplicationContext(), ScreenThree.class);
         startActivity(intent);
