@@ -119,8 +119,15 @@ public class SignField extends AppCompatActivity {
         mSignature.save(view, StoredPath);
         Toast.makeText(getApplicationContext(), "Signatur sparad", Toast.LENGTH_LONG).show();
         //sets the flag for enabling the continue button in previous activity
-        ScreenFour.signatureFlag = true;
-        setResult(RESULT_OK);
+        if (team.equals("Hemmalag")){
+            ScreenFour.signatureFlag1 = true;
+        }
+        if (team.equals("Bortalag")){
+            ScreenFour.signatureFlag2 = true;
+        }
+        //ScreenFour.signatureFlag = true;
+        Intent intent = new Intent();
+        setResult(ScreenFour.RESULT_OK, intent);
         finish();
     }
 

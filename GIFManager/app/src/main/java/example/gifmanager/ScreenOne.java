@@ -37,6 +37,7 @@ public class ScreenOne extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_one);
 
+        //getWindow().setBackgroundDrawableResource(R.drawable.gif_logo_2);
         this.spinner = (Spinner) findViewById(R.id.spinner);
         this.email1 = (EditText) findViewById(R.id.input_email1);
         this.email2 = (EditText) findViewById(R.id.input_email2);
@@ -60,19 +61,19 @@ public class ScreenOne extends AppCompatActivity {
                 switch (i){
                     case 0:
                         dh.setCurrentDate(myAdapter.getItem(i));
-                        sDate = myAdapter.getItem(i);
+                        sDate = cutString(myAdapter.getItem(i));
                         break;
                     case 1:
                         dh.setCurrentDate(myAdapter.getItem(i));
-                        sDate = myAdapter.getItem(i);
+                        sDate = cutString(myAdapter.getItem(i));
                         break;
                     case 2:
                         dh.setCurrentDate(myAdapter.getItem(i));
-                        sDate = myAdapter.getItem(i);
+                        sDate = cutString(myAdapter.getItem(i));
                         break;
                     case 3:
                         dh.setCurrentDate(myAdapter.getItem(i));
-                        sDate = myAdapter.getItem(i);
+                        sDate = cutString(myAdapter.getItem(i));
                         break;
                 }
             }
@@ -109,6 +110,10 @@ public class ScreenOne extends AppCompatActivity {
     private String[] generateList(){
         String a[] = {"2018","2017","2016","2015"};
         return a;
+    }
+
+    private String cutString(String s){
+        return s.substring(2);
     }
 
     private void checkLogin(){
