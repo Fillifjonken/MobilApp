@@ -220,7 +220,7 @@ public class SignField extends AppCompatActivity {
         protected void onDraw(Canvas canvas) {
             canvas.drawPath(path, paint);
         }
-        
+
         @Override
         public boolean onTouchEvent(MotionEvent event) {
             float eventX = event.getX();
