@@ -1,12 +1,24 @@
 <resources>
     <string name="app_name">GIFManager</string>
+    <string name="reportResult">Rapportera resultat</string>
+    <string name="scan_results">Fota resultat</string>
+    <string name="scan_fairplay">Fota fairplay</string>
+    <string name="generate_report">Generera rapport</string>
+    <string name="send_report">Skicka rapport</string>
+    <string name="match_report">Matchrapport</string>
+    <string name="registered_players">Registrerade spelare</string>
+    <string name="result_and_fairplay">Resultat och fairplay</string>
+    <string name="no_players_registered">Inga spelare registrerade</string>
+    <string name="resultcard">Resultatkort</string>
+    <string name="fairplay">Fairplaykort</string>
+    <string name="trainer_signature">signatur</string>
     <string name="fieldselect">Välj fotbollsplan</string>
     <string name="year">År</string>
     <string name="password">Lösenord</string>
     <string name="repeat_password">Upprepa Lösenord</string>
     <string name="admin_email">Admin Email</string>
     <string name="repeat_admin_email">Upprepa Admin Email</string>
-    <string name="let_s_go">NU KÖR VI!</string>
+    <string name="let_s_go">Påbörja Registrering</string>
     <string name="wrong_password">Fel lösenord</string>
     <string name="no_match_email">Ingen matchande email</string>
 </resources>

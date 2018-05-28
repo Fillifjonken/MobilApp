@@ -99,6 +99,7 @@ public class ScreenThree extends MainActivity{
         //Split Time
         String[] timeSplit = parts[3].split("<");
         String time = timeSplit[0];
+        DataHolder.getInstance().setTimeOfMatch(time);
         //Split group number
         String[] groupSplit = parts[2].split(">");
         String[] groupSplit2 = groupSplit[1].split("<");
