@@ -66,15 +66,19 @@ public class ScreenOne extends AppCompatActivity {
                 switch (i){
                     case 0:
                         dh.setCurrentDate(myAdapter.getItem(i));
+                        sDate = myAdapter.getItem(i);
                         break;
                     case 1:
                         dh.setCurrentDate(myAdapter.getItem(i));
+                        sDate = myAdapter.getItem(i);
                         break;
                     case 2:
                         dh.setCurrentDate(myAdapter.getItem(i));
+                        sDate = myAdapter.getItem(i);
                         break;
                     case 3:
                         dh.setCurrentDate(myAdapter.getItem(i));
+                        sDate = myAdapter.getItem(i);
                         break;
                 }
             }
@@ -122,7 +126,7 @@ public class ScreenOne extends AppCompatActivity {
         if (isEqual(pass1, pass2)) {
             if (isEqual(email1, email2) && isEmailValid(email1)){
                 if(isEqual(pass1, this.pass)){
-                    createSession(date,email1);
+                    createSession(email1);
                 }
                 else{
                     this.p1.getText().clear();
@@ -156,16 +160,16 @@ public class ScreenOne extends AppCompatActivity {
     }
 
 
-    private void createSession(String date , String email ) {
+    private void createSession( String email ) {
 
         //Set variables
         this.dh.setAdminCode(this.pass);
         this.dh.setAdminEmail(email);
-        this.dh.setCurrentDate(this.date1.getText().toString());
+        this.dh.setCurrentDate(this.sDate);
 
         SharedPreferences preferences = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("date",date);
+        editor.putString("date",this.sDate);
         editor.putString("email", email);
         editor.apply();
         Intent intent = new Intent(this, FieldActivity.class);
