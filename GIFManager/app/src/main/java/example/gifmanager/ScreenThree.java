@@ -134,10 +134,7 @@ public class ScreenThree extends MainActivity{
 
     public class urlParcer extends AsyncTask<Void, Void, Void> {
 
-        public String temp = DataHolder.getInstance().getCurrentDate();
-        public String temp2 = DataHolder.getInstance().getFieldNumber();
-        public String temp3 = DataHolder.getInstance().getParceUrl();
-        public String temp4 = "http://teamplaycup.se/cup/?games&home=kurirenspelen/"+temp+"&scope=all&arena="+temp2+"&field=";
+
         protected Void doInBackground(Void... params) {
 
 
@@ -160,7 +157,7 @@ public class ScreenThree extends MainActivity{
 
                 }
             }catch(Exception e){
-                System.err.print(e);
+                e.printStackTrace();
 
             }
             return null;

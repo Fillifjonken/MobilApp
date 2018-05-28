@@ -59,20 +59,20 @@ public class FieldActivity extends AppCompatActivity {
 
         //Checks which button that was pressed
         if(v == A11){field = "A%2011-manna%20(Gstad)";}
-        else if(v == B11){field = "B%2011-manna&20(Gstad)";}
-        else if(v == C17){field = "C1%207-manna&20(Gstad)";}
-        else if(v == C27){field = "C2%207-manna&20(Gstad)";}
-        else if(v == C35){field = "C3%205-manna&20(Gstad)";}
-        else if(v == C45){field = "C4%205-manna&20(Gstad)";}
-        else if(v == D7){field = "D%207-manna&20(Gstad)";}
-        else if(v == E1){field = "E1%207-manna&20(Gstad)";}
-        else if(v == E2){field = "E2%205-manna&20(Gstad)";}
-        else if(v == E3){field = "E3%205-manna&20(Gstad)";}
-        else if(v == S1){field = "S1%2011-manna%20(Sunderbyn)";}
-        else if(v == R1){field = "R1%205-manna%20(Rutvik)";}
-        else if(v == R2){field = "R2%207-manna%20(Rutvik)";}
-        else if(v == R3){field = "R3%207-manna%20(Rutvik)";}
-        else if(v == R4){field = "R4%207-manna%20(Rutvik)";}
+        if(v == B11){field = "B%2011-manna%20(Gstad)";}
+        if(v == C17){field = "C1%207-manna%20(Gstad)";}
+        if(v == C27){field = "C2%207-manna%20(Gstad)";}
+        if(v == C35){field = "C3%205-manna%20(Gstad)";}
+        if(v == C45){field = "C4%205-manna%20(Gstad)";}
+        if(v == D7){field = "D%207-manna%20(Gstad)";}
+        if(v == E1){field = "E1%207-manna%20(Gstad)";}
+        if(v == E2){field = "E2%205-manna%20(Gstad)";}
+        if(v == E3){field = "E3%205-manna%20(Gstad)";}
+        if(v == S1){field = "S1%2011-manna%20(Sunderbyn)";}
+        if(v == R1){field = "R1%205-manna%20(Rutvik)";}
+        if(v == R2){field = "R2%207-manna%20(Rutvik)";}
+        if(v == R3){field = "R3%207-manna%20(Rutvik)";}
+        if(v == R4){field = "R4%207-manna%20(Rutvik)";}
 
         //Stores the corresponding fieldname in DataHolder
         DataHolder.getInstance().setFieldNumber(field);
