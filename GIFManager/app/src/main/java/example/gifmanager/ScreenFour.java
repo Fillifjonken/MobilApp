@@ -44,7 +44,7 @@ public class ScreenFour extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_screen_four);
         teamName = (TextView) findViewById(R.id.textView_teamname);
-        teamName.setText(team);
+        teamName.setText("Konfigurera lag: " + team);
         mConfirm = (Button) findViewById(R.id.confirm_button);
         player_list = (ListView) findViewById(R.id.players_list);
         player_list.setOnItemClickListener(new AdapterView.OnItemClickListener(){

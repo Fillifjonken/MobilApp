@@ -35,7 +35,9 @@
         </activity>
         <activity android:name=".ScreenThree" />
         <activity android:name=".ScreenFour" />
-        <activity android:name=".SignField" />
+        <activity
+            android:name=".SignField"
+            android:screenOrientation="portrait"/>
         <activity android:name=".ScreenFive" />
         <activity android:name=".PDFActivity" />
         <activity android:name=".FieldActivity" />

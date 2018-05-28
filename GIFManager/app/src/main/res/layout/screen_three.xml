@@ -21,9 +21,13 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
+        android:fontFamily="serif"
         android:text="Välj match"
+        android:textAllCaps="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        android:textSize="30sp" />
+        android:textColor="#009568"
+        android:textSize="24sp"
+        android:textStyle="bold|italic" />
 
     <ListView
         android:id="@+id/listView"
