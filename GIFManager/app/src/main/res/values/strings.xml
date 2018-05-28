@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">GIFManager</string>
+    <string name="fieldselect">Välj fotbollsplan</string>
+    <string name="year">År</string>
+    <string name="password">Lösenord</string>
+    <string name="repeat_password">Upprepa Lösenord</string>
+    <string name="admin_email">Admin Email</string>
+    <string name="repeat_admin_email">Upprepa Admin Email</string>
+    <string name="let_s_go">NU KÖR VI!</string>
+    <string name="wrong_password">Fel lösenord</string>
+    <string name="no_match_email">Ingen matchande email</string>
 </resources>
