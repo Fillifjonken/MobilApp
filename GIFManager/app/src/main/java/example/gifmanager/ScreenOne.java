@@ -3,26 +3,20 @@ package example.gifmanager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 
-import java.lang.reflect.Array;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 
 public class ScreenOne extends AppCompatActivity {
 
@@ -173,6 +167,5 @@ public class ScreenOne extends AppCompatActivity {
         Intent intent = new Intent(this, FieldActivity.class);
         startActivity(intent);
     }
-
 }
 
