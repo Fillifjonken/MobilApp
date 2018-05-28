@@ -77,9 +77,14 @@ public class ScreenFour extends AppCompatActivity {
     public void addPlayer(String player){
         if(!playerNames.contains(player)){
             playerNames.add(player);
+        }else{
+            for(int i = 0; i < playerNames.size(); i++){
+                if(playerNames.get(i) == player){
+                    playerNames.remove(i);
+                }
+            }
         }
     }
-
     //Opens SignField activity with result request
     //(this enables updating the current activity after SignField has finished
     public void openSignature(View view){
