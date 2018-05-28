@@ -25,7 +25,7 @@ public class ScreenOne extends AppCompatActivity {
 
     //Clean up --Later
     byte[] imageAsBytes;
-    private String pass = "admin";
+    private String pass;
     private DataHolder dh;
     private SpinnerAdapter spa;
     private Date dDate;
@@ -33,8 +33,6 @@ public class ScreenOne extends AppCompatActivity {
     Spinner spinner;
     Button button1;
     EditText email1,email2,p1,p2,date1;
-
-
 
 
     @Override
@@ -49,6 +47,7 @@ public class ScreenOne extends AppCompatActivity {
 
 
         //Set components
+        this.pass = getString(R.string.pass);
         this.spinner = (Spinner) findViewById(R.id.spinner);
         this.email1 = (EditText) findViewById(R.id.input_email1);
         this.email2 = (EditText) findViewById(R.id.input_email2);
