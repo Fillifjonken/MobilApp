@@ -21,7 +21,8 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 
 public class ScreenFour extends AppCompatActivity {
-    public static boolean signatureFlag;    //Signifies that the user has entered its signature
+    public static boolean signatureFlag1;    //Signifies that the user has entered its signature
+    public static boolean signatureFlag2;
     static final int REQUEST_CODE = 1;
     String team = "Lag"; // or other values
     TextView teamName;
@@ -43,8 +44,8 @@ public class ScreenFour extends AppCompatActivity {
             this.team = b.getString("key"); //Fetches the team from Intent
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_screen_four);
-        teamName = (TextView) findViewById(R.id.textView_teamname);
-        teamName.setText("Konfigurera lag: " + team);
+        //teamName = (TextView) findViewById(R.id.textView_teamname);
+        //teamName.setText("Konfigurera lag: " + team);
         mConfirm = (Button) findViewById(R.id.confirm_button);
         player_list = (ListView) findViewById(R.id.players_list);
         player_list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -87,11 +88,11 @@ public class ScreenFour extends AppCompatActivity {
     //Opens SignField activity with result request
     //(this enables updating the current activity after SignField has finished
     public void openSignature(View view){
-        Intent intent = new Intent(getApplicationContext(), SignField.class);
+        Intent signIntent = new Intent(getApplicationContext(), SignField.class);
         Bundle b = new Bundle();
         b.putString("key", team); //Declares which team for next Intent
-        intent.putExtras(b); //Puts team to the next Intent
-        startActivityForResult(intent, REQUEST_CODE);
+        signIntent.putExtras(b); //Puts team to the next Intent
+        startActivityForResult(signIntent, REQUEST_CODE);
     }
 
     public void confirmTeam(View view){
@@ -107,13 +108,13 @@ public class ScreenFour extends AppCompatActivity {
 
     @Override
     //On return from other activity (SignField), button availability is updated
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         checkSignatureFlag();
     }
 
     //Checks if SignatureFlag is true (meaning user has entered signature)
     public void checkSignatureFlag(){
-        if (signatureFlag) {
+        if ( (signatureFlag1 && (DataHolder.getInstance().getActiveTeam() == 1)) || (signatureFlag2 && (DataHolder.getInstance().getActiveTeam() == 2)) ) {
             mConfirm.setEnabled(true); //Enables "confirm"-button
         } else {
             mConfirm.setEnabled(false); //Disables "confirm"-button
