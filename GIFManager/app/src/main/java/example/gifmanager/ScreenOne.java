@@ -3,6 +3,8 @@ package example.gifmanager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -21,6 +23,8 @@ import java.util.regex.Pattern;
 public class ScreenOne extends AppCompatActivity {
 
 
+
+    byte[] imageAsBytes;
     private String pass = "admin";
     private DataHolder dh;
     private SpinnerAdapter spa;
@@ -31,13 +35,20 @@ public class ScreenOne extends AppCompatActivity {
     EditText email1,email2,p1,p2,date1;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_one);
 
-        //getWindow().setBackgroundDrawableResource(R.drawable.gif_logo_2);
+        //getWindow().setBackgroundDrawableResource(R.drawable.background_screen_one);
+
+
+
+
+
         this.spinner = (Spinner) findViewById(R.id.spinner);
         this.email1 = (EditText) findViewById(R.id.input_email1);
         this.email2 = (EditText) findViewById(R.id.input_email2);
@@ -49,6 +60,7 @@ public class ScreenOne extends AppCompatActivity {
         this.dh.initDataHolder();
 
         this.button1 = (Button) findViewById(R.id.button);
+
 
         String a[] = generateList();
         final ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(ScreenOne.this, android.R.layout.simple_spinner_dropdown_item, a);
