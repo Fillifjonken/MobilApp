@@ -58,11 +58,11 @@ public class SignField extends AppCompatActivity {
         if(b != null)
             team = b.getString("key");
         this.StoredPath = DIRECTORY + "signature.png";
-        if (team.equals("HomeTeam")){
+        if (team.equals("Hemmalag")){
             this.StoredPath = DIRECTORY + "signature_home.png";
             DataHolder.getInstance().setTeam1SignaturePath(this.StoredPath);
         }
-        if (team.equals("VisitTeam")){
+        if (team.equals("Bortalag")){
             this.StoredPath = DIRECTORY + "signature_visit.png";
             DataHolder.getInstance().setTeam2SignaturePath(this.StoredPath);
         }
