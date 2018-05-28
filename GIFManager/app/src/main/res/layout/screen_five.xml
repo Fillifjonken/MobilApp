@@ -24,14 +24,14 @@
         android:id="@+id/camera_preview"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"></FrameLayout>
+        android:layout_weight="1" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@android:color/background_light"
-        android:text="Report results for match"
+        android:text="@string/reportResult"
         android:textAlignment="center"
         android:textSize="30sp"
         android:textColor="@color/colorPrimaryDark"
@@ -62,14 +62,14 @@
                 android:id="@+id/scanResult"
                 android:layout_width="176dp"
                 android:layout_height="match_parent"
-                android:text="Scan results"
+                android:text="@string/scan_results"
                 android:background="@drawable/button_back"/>
 
             <Button
                 android:id="@+id/scanFairplay"
                 android:layout_width="180dp"
                 android:layout_height="match_parent"
-                android:text="Scan Fairplay"
+                android:text="@string/scan_fairplay"
                 android:background="@drawable/button_back"/>
         </TableRow>
 
@@ -106,14 +106,14 @@
                 android:id="@+id/generate"
                 android:layout_width="176dp"
                 android:layout_height="58dp"
-                android:text="Generate report"
+                android:text="@string/generate_report"
                 android:background="@drawable/button_back"/>
 
             <Button
                 android:id="@+id/finalize"
                 android:layout_width="176dp"
                 android:layout_height="58dp"
-                android:text="Send Report"
+                android:text="@string/send_report"
                 android:background="@drawable/button_back"/>
         </TableRow>
 

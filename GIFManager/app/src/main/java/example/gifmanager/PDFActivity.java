@@ -86,7 +86,7 @@ public class PDFActivity extends Activity {
         // Adding Title....
         Font mOrderDetailsTitleFont = new Font(urName, 36.0f, Font.NORMAL, BaseColor.BLACK);
         // Creating Chunk
-        Chunk mOrderDetailsTitleChunk = new Chunk("Match Report", mOrderDetailsTitleFont);
+        Chunk mOrderDetailsTitleChunk = new Chunk(getString(R.string.match_report), mOrderDetailsTitleFont);
         // Creating Paragraph to add...
         Paragraph mOrderDetailsTitleParagraph = new Paragraph(mOrderDetailsTitleChunk);
         // Setting Alignment for Heading
@@ -106,7 +106,7 @@ public class PDFActivity extends Activity {
 
         try {
             Font registeredPlayersFont = new Font(urName, 24.0f, Font.NORMAL, BaseColor.BLACK);
-            Chunk registeredPlayersChunk = new Chunk("Registered Players", registeredPlayersFont);
+            Chunk registeredPlayersChunk = new Chunk(getString(R.string.registered_players), registeredPlayersFont);
             // Creating Paragraph to add...
             Paragraph registeredPlayersParagraph = new Paragraph(registeredPlayersChunk);
             // Setting Alignment for Heading
@@ -132,7 +132,7 @@ public class PDFActivity extends Activity {
 
         try {
             Font resultAndFairplayFont = new Font(urName, 24.0f, Font.NORMAL, BaseColor.BLACK);
-            Chunk rafChunk = new Chunk("Result and Fairplay", resultAndFairplayFont);
+            Chunk rafChunk = new Chunk(getString(R.string.result_and_fairplay), resultAndFairplayFont);
             // Creating Paragraph to add...
             Paragraph rafPar = new Paragraph(rafChunk);
             // Setting Alignment for Heading
@@ -153,7 +153,7 @@ public class PDFActivity extends Activity {
         finish();
     }
 
-    public static PdfPTable createPlayerTable() throws DocumentException {
+    public PdfPTable createPlayerTable() throws DocumentException {
         // a table with three columns
         PdfPTable playerTable = new PdfPTable(2);
         // the cell object
@@ -170,10 +170,10 @@ public class PDFActivity extends Activity {
         ArrayList<String> team2 = DataHolder.getInstance().getTeam2Members();
 
         if(team1.isEmpty()){
-            team1.add("No players registered");
+            team1.add(getString(R.string.no_players_registered));
         }
         if(team2.isEmpty()){
-            team2.add("No players registered");
+            team2.add(getString(R.string.no_players_registered));
         }
 
         int maxLength = (team1.size() > team2.size())?team1.size():team2.size();
@@ -196,7 +196,7 @@ public class PDFActivity extends Activity {
         return playerTable;
     }
 
-    public static PdfPTable createResultAndFairplayTable() throws DocumentException {
+    public PdfPTable createResultAndFairplayTable() throws DocumentException {
         Image img = null;
         try {
             String imagePath = DataHolder.getInstance().getResultImagePath();
@@ -222,10 +222,10 @@ public class PDFActivity extends Activity {
         PdfPTable table = new PdfPTable(2);
         PdfPCell cell;
 
-        cell = new PdfPCell(new Paragraph("Resultcard"));
+        cell = new PdfPCell(new Paragraph(getString(R.string.resultcard)));
         table.addCell(cell);
 
-        cell = new PdfPCell(new Paragraph("Fairplay"));
+        cell = new PdfPCell(new Paragraph(getString(R.string.fairplay)));
         table.addCell(cell);
 
         cell = new PdfPCell(img);
@@ -236,7 +236,7 @@ public class PDFActivity extends Activity {
         return table;
     }
 
-    public static PdfPTable signatureTable() throws DocumentException {
+    public PdfPTable signatureTable() throws DocumentException {
         Image img = null;
         try {
             String imagePath = DataHolder.getInstance().getTeam1SignaturePath();
@@ -262,12 +262,12 @@ public class PDFActivity extends Activity {
         PdfPTable table = new PdfPTable(2);
         PdfPCell cell;
 
-        cell = new PdfPCell(new Paragraph(DataHolder.getInstance().getTeam1Name() +
-                " trainer signature"));
+        cell = new PdfPCell(new Paragraph(DataHolder.getInstance().getTeam1Name() + " " +
+                getString(R.string.trainer_signature)));
         table.addCell(cell);
 
-        cell = new PdfPCell(new Paragraph(DataHolder.getInstance().getTeam2Name() +
-        " trainer signature"));
+        cell = new PdfPCell(new Paragraph(DataHolder.getInstance().getTeam2Name() + " " +
+                getString(R.string.trainer_signature)));
         table.addCell(cell);
 
         cell = new PdfPCell(img);

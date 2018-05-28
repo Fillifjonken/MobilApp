@@ -71,6 +71,7 @@ public class ScreenFive extends MainActivity{
             Camera.Parameters params = mCamera.getParameters();
             List<Camera.Size> cameraSizes = params.getSupportedPreviewSizes();
             params.setPreviewSize(cameraSizes.get(0).width, cameraSizes.get(0).height);
+            params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
 
             mCamera.setParameters(params);
             mCamera.setDisplayOrientation(90);
