@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -142,11 +143,16 @@ public class ScreenThree extends MainActivity{
         public String temp2 = DataHolder.getInstance().getFieldNumber();
         public String temp3 = DataHolder.getInstance().getParceUrl();
         public String temp4 = "http://teamplaycup.se/cup/?games&home=kurirenspelen/"+temp+"&scope=all&arena="+temp2+"&field=";
+        public String hej = "http://teamplaycup.se/cup/?games&home=kurirenspelen/17&scope=all&arena=B%2011-manna%20(Gstad)&field=";
+
         protected Void doInBackground(Void... params) {
 
 
+            if(new String("http://teamplaycup.se/cup/?games&home=kurirenspelen/17&scope=all&arena=B%2011-manna%20(Gstad)&field=").equals(temp4)){
+                Boolean bajs = true;
+            }
             try {
-                Document doc = Jsoup.connect(DataHolder.getInstance().getParceUrl()).maxBodySize(0).get();
+                Document doc = Jsoup.connect(temp4).maxBodySize(0).get();
                 Elements ele = doc.select("div.content div.table-responsive table.table-condensed");
 
                 for(Element element: ele){
@@ -164,7 +170,7 @@ public class ScreenThree extends MainActivity{
 
                 }
             }catch(Exception e){
-                System.err.print(e);
+                e.printStackTrace();
 
             }
             return null;
