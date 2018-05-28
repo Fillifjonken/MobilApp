@@ -21,7 +21,7 @@
         android:layout_centerHorizontal="true"
         android:layout_margin="16dp"
         android:fontFamily="serif"
-        android:text="Välj fotbollsplan"
+        android:text="@string/fieldselect"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="#009568"
