@@ -116,7 +116,6 @@ public class ScreenOne extends AppCompatActivity {
     private void checkLogin(){
         String email2 = this.email2.getText().toString();
         String email1 = this.email1.getText().toString();
-        String date = this.date1.getText().toString();
         String pass1 = this.p1.getText().toString();
         String pass2 = this.p2.getText().toString();
 
