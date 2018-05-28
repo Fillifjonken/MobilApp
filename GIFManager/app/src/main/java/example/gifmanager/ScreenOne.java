@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 public class ScreenOne extends AppCompatActivity {
 
 
-
+    //Clean up --Later
     byte[] imageAsBytes;
     private String pass = "admin";
     private DataHolder dh;
@@ -48,7 +48,7 @@ public class ScreenOne extends AppCompatActivity {
 
 
 
-
+        //Set components
         this.spinner = (Spinner) findViewById(R.id.spinner);
         this.email1 = (EditText) findViewById(R.id.input_email1);
         this.email2 = (EditText) findViewById(R.id.input_email2);
@@ -62,11 +62,13 @@ public class ScreenOne extends AppCompatActivity {
         this.button1 = (Button) findViewById(R.id.button);
 
 
+        //Handle spinner and year in form.
+        //Also uggly but redo --Later
         String a[] = generateList();
         final ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(ScreenOne.this, android.R.layout.simple_spinner_dropdown_item, a);
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.spinner.setAdapter(myAdapter);
-
+        this.spinner.setDropDownWidth(250);
         this.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -111,7 +113,7 @@ public class ScreenOne extends AppCompatActivity {
         p1.setText("admin");
         //------------------
 
-
+        //Move to next activity after filling form
         this.button1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,15 +121,17 @@ public class ScreenOne extends AppCompatActivity {
             }
         });
     }
+    //Uggly shit, works but redo. --Later
     private String[] generateList(){
         String a[] = {"2018","2017","2016","2015"};
         return a;
     }
-
+    //Cut year to last 2 digits, this to make it easier to handle in DataHolder.
     private String cutString(String s){
         return s.substring(2);
     }
 
+    //Some checks to make sure input is correct.
     private void checkLogin(){
         String email2 = this.email2.getText().toString();
         String email1 = this.email1.getText().toString();
@@ -157,6 +161,7 @@ public class ScreenOne extends AppCompatActivity {
         }
     }
 
+    //Check if email has @ and .
     private static boolean isEmailValid(String email) {
         String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
         Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
@@ -166,23 +171,26 @@ public class ScreenOne extends AppCompatActivity {
     private boolean isEqual(String x , String y){
         return x.equals(y);
     }
-    private boolean isEmpty(String x){
-        return x.isEmpty();
-    }
 
-
+    //Form is valid and prepare for next activity.
+    //Save data in DataHolder.
     private void createSession( String email ) {
 
-        //Set variables
+        //Set variables in DataHolder
         this.dh.setAdminCode(this.pass);
         this.dh.setAdminEmail(email);
         this.dh.setCurrentDate(this.sDate);
 
+
+        //clean Start. --Later--
         SharedPreferences preferences = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("date",this.sDate);
         editor.putString("email", email);
         editor.apply();
+        //clean stop. --Later--
+
+        //Start new activity
         Intent intent = new Intent(this, FieldActivity.class);
         startActivity(intent);
     }
