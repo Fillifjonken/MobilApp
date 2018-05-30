@@ -82,6 +82,7 @@ public class ScreenFour extends AppCompatActivity {
 
     //add player name to temporary array
     public void addPlayer(String player){
+
         if(!playerNames.contains(player)){
             if(getCurrentPlayerAge(player) == 999){
                 playerNames.add(player);
