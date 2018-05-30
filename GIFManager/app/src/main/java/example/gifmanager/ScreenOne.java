@@ -16,6 +16,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,7 +33,10 @@ public class ScreenOne extends AppCompatActivity {
     private SpinnerAdapter spa;
     private Date dDate;
     private String sDate;
-    Spinner spinner;
+    private int playeryear;
+    private SimpleDateFormat n;
+    private ArrayList<String> ar ;
+    Spinner spinner,spinner2;
     Button button1;
     EditText email1,email2,p1,p2,date1;
 
@@ -60,6 +66,8 @@ public class ScreenOne extends AppCompatActivity {
 
         this.button1 = (Button) findViewById(R.id.button);
 
+
+        this.ar = new ArrayList<String>();
 
         //Handle spinner and year in form.
         //Also uggly but redo --Later
@@ -91,18 +99,38 @@ public class ScreenOne extends AppCompatActivity {
                 }
             }
 
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
+        //Adapter2 for spinner
+        final ArrayAdapter<String> myAdapter2 = new ArrayAdapter<String>(ScreenOne.this, android.R.layout.simple_spinner_dropdown_item, ar);
+        myAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        this.spinner2.setAdapter(myAdapter2);
+        this.spinner2.setDropDownWidth(250);
+        this.spinner2.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        String temp = myAdapter2.getItem(i);
 
-        /*Set date-----------------
-        dDate = Calendar.getInstance().getTime();
+                    }
 
-        SimpleDateFormat n = new SimpleDateFormat("yy");
-        sDate = n.format(dDate).toString();
-        date1.setText(sDate); //Här krashar det
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                    }
+                }
+        );
+
+
+        //Set date-----------------
+        this.dDate = Calendar.getInstance().getTime();
+        String yearString = new SimpleDateFormat("yyyy").format(dDate);
+        this.playeryear = Integer.parseInt(yearString);
+
         //---------------*/
 
         //-----Test------
@@ -124,6 +152,11 @@ public class ScreenOne extends AppCompatActivity {
     private String[] generateList(){
         String a[] = {"2018","2017","2016","2015"};
         return a;
+    }
+    private void generatePlayerYear(int numYear){
+        for(int i = this.playeryear; i > this.playeryear - numYear ; i--){
+            this.ar.add(Integer.toString(i));
+        }
     }
     //Cut year to last 2 digits, this to make it easier to handle in DataHolder.
     private String cutString(String s){

@@ -46,6 +46,17 @@
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/year" />
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/playeryear"/>
+                <Spinner
+                    android:id="@+id/spinner2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/year" />
+
             </android.support.design.widget.TextInputLayout>
             <!-- Email Label -->
 

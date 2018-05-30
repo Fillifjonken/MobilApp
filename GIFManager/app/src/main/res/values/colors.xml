@@ -6,7 +6,8 @@
     <color name="gif_green">#009568</color>
     <color name="white">#ffffff</color>
     <color name="black_overlay">#66000000</color>
-
+    <color name="red">#80E00707</color>
+    <color name="green">#80006600</color>
     <color name="colour_highlight_grey">#ff666666</color>
     <color name="colour_dark_blue">#ff000066</color>
     <color name="colour_dark_green">#ff006600</color>
