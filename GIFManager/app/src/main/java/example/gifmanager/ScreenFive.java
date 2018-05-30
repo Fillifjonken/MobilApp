@@ -108,10 +108,12 @@ public class ScreenFive extends MainActivity{
                     ByteArrayOutputStream bos = new ByteArrayOutputStream();
                     Bitmap bitmap = BitmapFactory.decodeByteArray(data , 0, data.length);
                     bitmap = rotateImage(90, bitmap);
-                    int width = bitmap.getWidth();
-                    int height = bitmap.getHeight()/2;
+                    int width = (4*bitmap.getWidth())/5;
+                    int height = bitmap.getHeight()/3;
+                    int yOffset = bitmap.getHeight()/14;
+                    int xOffset = bitmap.getWidth()/10;
                     int[] pixels = new int[width*height];//the size of the array is the dimensions of the sub-photo
-                    bitmap.getPixels(pixels, 0, width, 0, 0, width, height);//the stride value is (in my case) the width value
+                    bitmap.getPixels(pixels, 0, width, xOffset, yOffset, width, height);//the stride value is (in my case) the width value
                     bitmap = Bitmap.createBitmap(pixels, 0, width, width, height, Bitmap.Config.ARGB_8888);//ARGB_8888 is a good quality configuration
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);//100 is the best quality possibe
                     byte[] square = bos.toByteArray();
@@ -229,7 +231,7 @@ public class ScreenFive extends MainActivity{
         }else if(requestCode == SHOW_PDF_CODE){
             reportGenerated = true;
         }else{
-            //finish();
+            finish();
         }
     }
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layer-list
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape
+            android:shape="rectangle">
+            <solid android:color="#FFFFFF" /> // CHANGE THIS COLOR
+        </shape>
+    </item>
+    <item>
+        <bitmap
+            android:id="@+id/bitmap"
+            android:src="@drawable/gif_logo_2"
+            android:gravity="center_horizontal"
+            />
+        <bitmap android:src="@drawable/gif_logo_2"/>
+
+    </item>
+</layer-list>

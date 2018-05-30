@@ -41,7 +41,9 @@
         <activity android:name=".ScreenFive" />
         <activity android:name=".PDFActivity" />
         <activity android:name=".FieldActivity" />
-        <activity android:name=".ScreenOne">
+        <activity
+            android:name=".ScreenOne">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
