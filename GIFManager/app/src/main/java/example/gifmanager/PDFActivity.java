@@ -74,7 +74,7 @@ public class PDFActivity extends Activity {
             // adds a title for the document
             Font registeredPlayersFont = new Font(urName, 24.0f, Font.NORMAL, BaseColor.BLACK);
             String titleString = "Match " + DataHolder.getInstance().getNr() + " " +
-                    "20" + DataHolder.getInstance().getCurrentDate();
+                    "20" + DataHolder.getInstance().getCurrentDate() + "\n\n";
             Chunk registeredPlayersChunk = new Chunk(titleString, registeredPlayersFont);
             // Creating Paragraph to add...
             Paragraph registeredPlayersParagraph = new Paragraph(registeredPlayersChunk);
@@ -88,7 +88,7 @@ public class PDFActivity extends Activity {
 
         try {
             // adds an empty space and adds a player table
-            document.add(Chunk.NEWLINE);
+            //document.add(Chunk.NEWLINE);
             document.add(createPlayerTable());
         } catch (DocumentException e) {
             e.printStackTrace();

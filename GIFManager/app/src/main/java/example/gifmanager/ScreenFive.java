@@ -59,8 +59,7 @@ public class ScreenFive extends MainActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.screen_five);
 
-
-
+        // safe way to start a camera instance
         cameraReady = false;
         cameraId = findBackFacingCamera();
         if (cameraId < 0) {
@@ -77,40 +76,44 @@ public class ScreenFive extends MainActivity{
             mCamera.setDisplayOrientation(90);
         }
 
-
+        // starts the camera preview
         mPreview = new CameraPreview(this, mCamera);
         final FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
         preview.addView(mPreview);
 
+        // creates a progressbar to be displayed when taking a picture
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mProgressBar.setMax(100);
         mProgressBar.setVisibility(View.INVISIBLE);
 
-        Button captureResult = (Button) findViewById(R.id.scanResult);
-        Button captureFairplay = (Button) findViewById(R.id.scanFairplay);
+        Button captureResult = (Button) findViewById(R.id.scanResult); // capture result button
+        Button captureFairplay = (Button) findViewById(R.id.scanFairplay); // capture fairplay button
 
-        resultView = (ImageView) findViewById(R.id.resultView);
-        fairplayView = (ImageView) findViewById(R.id.fairplayView);
+        resultView = (ImageView) findViewById(R.id.resultView); // imageview displaying the result
+        fairplayView = (ImageView) findViewById(R.id.fairplayView); // imageview displaying fairplay
 
+
+        /*
+         * the picture callback functions that is called when a picture has been captured
+         */
         final Camera.PictureCallback mPicture = new Camera.PictureCallback() {
 
             @Override
             public void onPictureTaken(byte[] data, Camera camera) {
                 File pictureFile = getOutputMediaFile(CAPTURE_MODE);
                 if (pictureFile == null){
-                    Log.d(TAG, "Error creating media file, check storage permissions: "); //+
-                            //e.getMessage());
+                    Log.d(TAG, "Error creating media file, check storage permissions: ");
                     return;
                 }
 
-
                 try {
+                    // picture preprocessing of bitmap
                     ByteArrayOutputStream bos = new ByteArrayOutputStream();
                     Bitmap bitmap = BitmapFactory.decodeByteArray(data , 0, data.length);
-                    bitmap = rotateImage(90, bitmap);
-                    int width = (4*bitmap.getWidth())/5;
-                    int height = bitmap.getHeight()/3;
-                    int yOffset = bitmap.getHeight()/14;
+                    bitmap = rotateImage(90, bitmap); // rotate bitmap for correct orientation
+                    int width = (4*bitmap.getWidth())/5; // set width to 4/5 of original frame
+                    int height = bitmap.getHeight()/3;  // set height to 1/3 of original frame
+                    int yOffset = bitmap.getHeight()/14; // sets a small offset to fit preview
                     int xOffset = bitmap.getWidth()/10;
                     int[] pixels = new int[width*height];//the size of the array is the dimensions of the sub-photo
                     bitmap.getPixels(pixels, 0, width, xOffset, yOffset, width, height);//the stride value is (in my case) the width value
@@ -120,7 +123,7 @@ public class ScreenFive extends MainActivity{
 
                     FileOutputStream fos = new FileOutputStream(pictureFile);
                     //fos.write(data);
-                    fos.write(square);
+                    fos.write(square); // save the processed bitmap
                     fos.close();
 
                     if(CAPTURE_MODE == RESULT_CAPTURE){
@@ -173,6 +176,7 @@ public class ScreenFive extends MainActivity{
         final Intent generatePDF = new Intent(this, PDFActivity.class);
 
 
+
         mFinalize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -197,11 +201,8 @@ public class ScreenFive extends MainActivity{
         mGenerate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 DataHolder.getInstance().setReportPath(getReportPath());
                 startActivityForResult(generatePDF, GENERATE_PDF_CODE);
-
-
             }
         });
     }
