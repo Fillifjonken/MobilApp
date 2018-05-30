@@ -83,8 +83,6 @@ public class ScreenThree extends MainActivity{
         }else {
             button4.setEnabled(false);
         }
-
-
     }
 
     public void openScreenFourTeam1(View view){

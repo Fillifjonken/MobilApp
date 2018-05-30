@@ -66,7 +66,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
     }
+
     public void launch(){
+        DataHolder.getInstance().initDataHolder();
+        DataHolder.getInstance().setTeam1Sign(0);
+        DataHolder.getInstance().setTeam2Sign(0);
         Intent intent = new Intent(this, ScreenOne.class);
         startActivity(intent);
     }

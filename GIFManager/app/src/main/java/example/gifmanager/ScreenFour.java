@@ -168,7 +168,12 @@ public class ScreenFour extends AppCompatActivity {
 
     @Override
     //On return from other activity (SignField), button availability is updated
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    /*public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        checkSignatureFlag();
+    }*/
+
+    public void onResume(){
+        super.onResume();
         checkSignatureFlag();
     }
 

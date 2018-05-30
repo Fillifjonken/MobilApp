@@ -16,8 +16,8 @@ public class DataHolder {
     private String fieldNumber;
     private String team1Name;
     private String team2Name;
-    private int team1Sign;
-    private int team2Sign;
+    private int team1Sign = 0;
+    private int team2Sign = 0;
     private String team1Url;
     private String team2Url;
     private ArrayList<String> team1Members;
