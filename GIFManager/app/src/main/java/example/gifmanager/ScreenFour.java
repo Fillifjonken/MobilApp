@@ -99,7 +99,7 @@ public class ScreenFour extends AppCompatActivity {
             }
             else if((getCurrentPlayerAge(player)<= DataHolder.getInstance().getTarget_age()) || adminFlag){
                 playerNames.add(player);
-            }else if((getCurrentPlayerAge(player)> DataHolder.getInstance().getTarget_age()) && (overage_counter < 2)){
+            }else if((getCurrentPlayerAge(player) > DataHolder.getInstance().getTarget_age()) && (overage_counter < 2)){
                 playerNames.add(player);
                 Toast.makeText(ScreenFour.this, "Antal spelare över åldersgräns: " + overage_counter, Toast.LENGTH_SHORT).show();
                 overage_counter++;
