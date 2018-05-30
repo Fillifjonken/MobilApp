@@ -3,6 +3,7 @@ package example.gifmanager;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -24,6 +25,7 @@ public class ScreenFour extends AppCompatActivity {
     public static boolean signatureFlag1;    //Signifies that the user has entered its signature
     public static boolean signatureFlag2;
     static final int REQUEST_CODE = 1;
+    private int overage_counter = 0;
     String team = "Lag"; // or other values
     TextView teamName;
     Button mConfirm;
@@ -48,6 +50,8 @@ public class ScreenFour extends AppCompatActivity {
         //teamName.setText("Konfigurera lag: " + team);
         mConfirm = (Button) findViewById(R.id.confirm_button);
         player_list = (ListView) findViewById(R.id.players_list);
+        //player_list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        //player_list.setSelector(R.color.colorPrimaryDark);
         player_list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
             //onclick adds players to temporary array
@@ -55,7 +59,8 @@ public class ScreenFour extends AppCompatActivity {
             public void onItemClick(AdapterView<?>adapterView, View v, int pos, long id){
 
                 String item = ((TextView)v).getText().toString();
-                Toast.makeText(getBaseContext(), item + " tillagd i spelarlistan", Toast.LENGTH_SHORT).show();
+                player_list.setItemChecked(pos, true);
+                //Toast.makeText(getBaseContext(), item + " tillagd i spelarlistan", Toast.LENGTH_SHORT).show();
                 addPlayer(item);
             }
         });
@@ -76,14 +81,34 @@ public class ScreenFour extends AppCompatActivity {
     //add player name to temporary array
     public void addPlayer(String player){
         if(!playerNames.contains(player)){
-            playerNames.add(player);
+            if(getCurrentPlayerAge(player)<= DataHolder.getInstance().getTarget_age()){
+                playerNames.add(player);
+            }else if((getCurrentPlayerAge(player)> DataHolder.getInstance().getTarget_age()) && (overage_counter < 2)){
+                playerNames.add(player);
+                overage_counter++;
+            }
+
         }else{
             for(int i = 0; i < playerNames.size(); i++){
                 if(playerNames.get(i) == player){
-                    playerNames.remove(i);
+                    if(getCurrentPlayerAge(player) > DataHolder.getInstance().getTarget_age()){
+                        overage_counter--;
+                        playerNames.remove(i);
+                    }else{
+                        playerNames.remove(i);
+                    }
                 }
             }
         }
+    }
+
+    public int getCurrentPlayerAge(String player){
+        String lastTwo = null;
+        if (player != null && player.length() >= 4) {
+            lastTwo = player.substring(player.length() - 4, player.length() - 2);
+        }
+        int foo = Integer.parseInt(lastTwo);
+        return foo;
     }
     //Opens SignField activity with result request
     //(this enables updating the current activity after SignField has finished
@@ -153,7 +178,8 @@ public class ScreenFour extends AppCompatActivity {
         //Adds all parced playernames into the listview on the screen
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            playerAdapter = new ArrayAdapter(ScreenFour.this, android.R.layout.simple_list_item_1, adapterBuffer);
+            playerAdapter = new ArrayAdapter(ScreenFour.this, R.layout.list_view_row, adapterBuffer);
+            //playerAdapter = new ArrayAdapter(ScreenFour.this, android.R.layout.simple_list_item_1, adapterBuffer);
             player_list.setAdapter(playerAdapter);
 
         }

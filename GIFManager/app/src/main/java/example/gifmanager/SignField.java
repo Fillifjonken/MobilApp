@@ -69,7 +69,7 @@ public class SignField extends AppCompatActivity {
 
         mContent = (RelativeLayout) findViewById(R.id.canvas_layout);
         mSignature = new signature(getApplicationContext(), null);
-        //mSignature.setBackgroundColor(Color.WHITE);
+        mSignature.setBackgroundColor(Color.WHITE);
         // Dynamically generating Layout through java code
         mContent.addView(mSignature, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         mClear = (Button) findViewById(R.id.button_clear);
