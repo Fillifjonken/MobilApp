@@ -90,6 +90,9 @@ public class ScreenFour extends AppCompatActivity {
             }else if((getCurrentPlayerAge(player)> DataHolder.getInstance().getTarget_age()) && (overage_counter < 2)){
                 playerNames.add(player);
                 overage_counter++;
+                if(overage_counter == 2){
+                    Toast.makeText(ScreenFour.this, "Max Spelare Över Åldersgräns", Toast.LENGTH_SHORT).show();
+                }
             }
 
         }else{
