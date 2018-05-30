@@ -112,14 +112,13 @@ public class ScreenOne extends AppCompatActivity {
         final ArrayAdapter<String> myAdapter2 = new ArrayAdapter<String>(ScreenOne.this, android.R.layout.simple_spinner_dropdown_item, playeryears);
         myAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.spinner2.setAdapter(myAdapter2);
-        this.spinner2.setDropDownWidth(250);
+        this.spinner2.setDropDownWidth(150);
         this.spinner2.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                         String temp = myAdapter2.getItem(i);
-                        int year = Integer.parseInt(temp);
-                        dh.setTarget_age(year);
+                        dh.setTarget_age(temp);
                     }
 
                     @Override
@@ -155,10 +154,10 @@ public class ScreenOne extends AppCompatActivity {
     //Uggly shit, works but redo. --Later
     private String[] generateList(){
         this.playeryears = new String[]
-                        {"18","17","16","15"
-                        ,"14","13","12","11"
-                        ,"10","9","8","7","6"};
-        
+                        {"00","01","02","03"
+                        ,"04","05","06","07"
+                        ,"08","09","10","11","12"};
+
         String a[] = {"2018","2017","2016","2015"};
         return a;
     }
