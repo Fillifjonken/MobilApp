@@ -69,7 +69,7 @@ public class SignField extends AppCompatActivity {
 
         mContent = (RelativeLayout) findViewById(R.id.canvas_layout);
         mSignature = new signature(getApplicationContext(), null);
-        mSignature.setBackgroundColor(Color.WHITE);
+        //mSignature.setBackgroundColor(Color.WHITE);
         // Dynamically generating Layout through java code
         mContent.addView(mSignature, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         mClear = (Button) findViewById(R.id.button_clear);
@@ -160,6 +160,7 @@ public class SignField extends AppCompatActivity {
         }
     }
 
+    //contains the functions for drawing on the canvas + clear + save
     public class signature extends View {
 
         private static final float STROKE_WIDTH = 5f;
@@ -180,6 +181,7 @@ public class SignField extends AppCompatActivity {
             paint.setStrokeWidth(STROKE_WIDTH);
         }
 
+        //saves the signature as an image
         public void save(View v, String StoredPath) {
             Log.v("log_tag", "Width: " + v.getWidth());
             Log.v("log_tag", "Height: " + v.getHeight());
@@ -207,6 +209,7 @@ public class SignField extends AppCompatActivity {
 
         }
 
+        //clears the canvas
         public void clear() {
             path.reset();
             invalidate();

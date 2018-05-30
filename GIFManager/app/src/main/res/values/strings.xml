@@ -21,4 +21,5 @@
     <string name="let_s_go">Påbörja Registrering</string>
     <string name="wrong_password">Fel lösenord</string>
     <string name="no_match_email">Ingen matchande email</string>
+    <string name="pass">admin</string>
 </resources>

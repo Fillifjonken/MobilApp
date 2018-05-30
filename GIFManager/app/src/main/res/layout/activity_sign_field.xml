@@ -14,10 +14,13 @@
         android:layout_above="@+id/textView2"
         android:layout_alignParentTop="true"
         android:layout_marginTop="16dp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="serif"
         android:text="Signera Lagkonfiguraition"
         android:textAlignment="center"
-        android:textSize="32sp" />
+        android:textAllCaps="true"
+        android:textColor="#009568"
+        android:textSize="24sp"
+        android:textStyle="bold|italic" />
 
     <ImageView
         android:id="@+id/background"
@@ -35,8 +38,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:background="@drawable/button_back"
-        >
+        android:background="@drawable/button_back">
 
     </RelativeLayout>
 

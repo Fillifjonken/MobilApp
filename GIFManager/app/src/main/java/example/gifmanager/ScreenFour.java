@@ -95,6 +95,7 @@ public class ScreenFour extends AppCompatActivity {
         startActivityForResult(signIntent, REQUEST_CODE);
     }
 
+    //adds selected players to team in DataHolder
     public void confirmTeam(View view){
         if(DataHolder.getInstance().getActiveTeam() == 1){
             DataHolder.getInstance().setTeam1Members(playerNames);
@@ -114,6 +115,7 @@ public class ScreenFour extends AppCompatActivity {
 
     //Checks if SignatureFlag is true (meaning user has entered signature)
     public void checkSignatureFlag(){
+        //Checks which signature has been done
         if ( (signatureFlag1 && (DataHolder.getInstance().getActiveTeam() == 1)) || (signatureFlag2 && (DataHolder.getInstance().getActiveTeam() == 2)) ) {
             mConfirm.setEnabled(true); //Enables "confirm"-button
         } else {
@@ -148,6 +150,7 @@ public class ScreenFour extends AppCompatActivity {
 
 
         @Override
+        //Adds all parced playernames into the listview on the screen
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             playerAdapter = new ArrayAdapter(ScreenFour.this, android.R.layout.simple_list_item_1, adapterBuffer);
