@@ -36,6 +36,7 @@ public class ScreenOne extends AppCompatActivity {
     private int playeryear;
     private SimpleDateFormat n;
     private ArrayList<String> ar ;
+    private String[] playeryears;
     Spinner spinner,spinner2;
     Button button1;
     EditText email1,email2,p1,p2,date1;
@@ -55,6 +56,7 @@ public class ScreenOne extends AppCompatActivity {
         //Set components
         this.pass = getString(R.string.pass);
         this.spinner = (Spinner) findViewById(R.id.spinner);
+        this.spinner2 = (Spinner) findViewById(R.id.spinner2);
         this.email1 = (EditText) findViewById(R.id.input_email1);
         this.email2 = (EditText) findViewById(R.id.input_email2);
         this.p1 = (EditText) findViewById(R.id.input_password1);
@@ -67,7 +69,8 @@ public class ScreenOne extends AppCompatActivity {
         this.button1 = (Button) findViewById(R.id.button);
 
 
-        this.ar = new ArrayList<String>();
+
+
 
         //Handle spinner and year in form.
         //Also uggly but redo --Later
@@ -106,7 +109,7 @@ public class ScreenOne extends AppCompatActivity {
             }
         });
         //Adapter2 for spinner
-        final ArrayAdapter<String> myAdapter2 = new ArrayAdapter<String>(ScreenOne.this, android.R.layout.simple_spinner_dropdown_item, ar);
+        final ArrayAdapter<String> myAdapter2 = new ArrayAdapter<String>(ScreenOne.this, android.R.layout.simple_spinner_dropdown_item, playeryears);
         myAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.spinner2.setAdapter(myAdapter2);
         this.spinner2.setDropDownWidth(250);
@@ -115,7 +118,8 @@ public class ScreenOne extends AppCompatActivity {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                         String temp = myAdapter2.getItem(i);
-
+                        int year = Integer.parseInt(temp);
+                        dh.setTarget_age(year);
                     }
 
                     @Override
@@ -150,14 +154,19 @@ public class ScreenOne extends AppCompatActivity {
     }
     //Uggly shit, works but redo. --Later
     private String[] generateList(){
+        this.playeryears = new String[]
+                        {"18","17","16","15"
+                        ,"14","13","12","11"
+                        ,"10","9","8","7","6"};
+        
         String a[] = {"2018","2017","2016","2015"};
         return a;
     }
-    private void generatePlayerYear(int numYear){
+    /*private void generatePlayerYear(int numYear){
         for(int i = this.playeryear; i > this.playeryear - numYear ; i--){
             this.ar.add(Integer.toString(i));
         }
-    }
+    }*/
     //Cut year to last 2 digits, this to make it easier to handle in DataHolder.
     private String cutString(String s){
         return s.substring(2);
