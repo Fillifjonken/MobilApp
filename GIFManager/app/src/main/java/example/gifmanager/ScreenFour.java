@@ -1,6 +1,7 @@
 package example.gifmanager;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -92,26 +93,33 @@ public class ScreenFour extends AppCompatActivity {
 
     //add player name to temporary array
     public void addPlayer(String player){
-
+        int tempCounter = overage_counter;
+        int hej = DataHolder.getInstance().getTarget_age();
         if(!playerNames.contains(player)){
+
             if(getCurrentPlayerAge(player) == 999){
                 playerNames.add(player);
             }
-            else if((getCurrentPlayerAge(player)<= DataHolder.getInstance().getTarget_age()) || adminFlag){
+            else if((getCurrentPlayerAge(player)>= DataHolder.getInstance().getTarget_age()) || adminFlag){
                 playerNames.add(player);
-            }else if((getCurrentPlayerAge(player) > DataHolder.getInstance().getTarget_age()) && (overage_counter < 2)){
+            }else if((getCurrentPlayerAge(player) < DataHolder.getInstance().getTarget_age()) && (overage_counter < 2)) {
                 playerNames.add(player);
-                Toast.makeText(ScreenFour.this, "Antal spelare över åldersgräns: " + overage_counter, Toast.LENGTH_SHORT).show();
                 overage_counter++;
-                if(overage_counter == 2){
-                    Toast.makeText(ScreenFour.this, player + " är över åldersgräns, lades ej till i spelarlistan pga överskridet maxantal", Toast.LENGTH_LONG).show();
-                }
+                Toast.makeText(ScreenFour.this, "Antal spelare över åldersgräns: " + overage_counter, Toast.LENGTH_SHORT).show();
+
+            }else if(tempCounter == 2 && (getCurrentPlayerAge(player) < DataHolder.getInstance().getTarget_age())){
+                player_list.setAdapter(playerAdapter);
+                overage_counter = 0;
+                playerNames.clear();
+                Toast.makeText(ScreenFour.this, "Antal Spelare över Maxålder överskridet", Toast.LENGTH_LONG).show();
             }
+
+
 
         }else{
             for(int i = 0; i < playerNames.size(); i++){
                 if(playerNames.get(i) == player){
-                    if(getCurrentPlayerAge(player) > DataHolder.getInstance().getTarget_age()){
+                    if(getCurrentPlayerAge(player) < DataHolder.getInstance().getTarget_age()){
                         overage_counter--;
                         playerNames.remove(i);
                     }else{
@@ -160,16 +168,23 @@ public class ScreenFour extends AppCompatActivity {
 
     @Override
     //On return from other activity (SignField), button availability is updated
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    /*public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        checkSignatureFlag();
+    }*/
+
+    public void onResume(){
+        super.onResume();
         checkSignatureFlag();
     }
 
     //Checks if SignatureFlag is true (meaning user has entered signature)
     public void checkSignatureFlag(){
+        int team1Sign = DataHolder.getInstance().getTeam1Sign();
+        int team2Sign = DataHolder.getInstance().getTeam2Sign();
         //Checks which signature has been done
-        if ( (signatureFlag1 && (DataHolder.getInstance().getActiveTeam() == 1)) || (signatureFlag2 && (DataHolder.getInstance().getActiveTeam() == 2)) ) {
+        if ( (team1Sign == 1) && (DataHolder.getInstance().getActiveTeam() == 1) || ((team2Sign == 1) && (DataHolder.getInstance().getActiveTeam() == 2)) ) {
             mConfirm.setEnabled(true); //Enables "confirm"-button
-            mConfirm.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_back_ready));
+            mConfirm.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_back));
         } else {
             mConfirm.setEnabled(false); //Disables "confirm"-button
             //mConfirm.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_back_not_ready));
@@ -207,7 +222,7 @@ public class ScreenFour extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             playerAdapter = new ArrayAdapter(ScreenFour.this, android.R.layout.simple_list_item_multiple_choice, adapterBuffer);
-            //playerAdapter = new ArrayAdapter(ScreenFour.this, android.R.layout.simple_list_item_1, adapterBuffer);
+           // playerAdapter = new ArrayAdapter(ScreenFour.this, R.layout.list_view_row, adapterBuffer);
             player_list.setAdapter(playerAdapter);
 
         }

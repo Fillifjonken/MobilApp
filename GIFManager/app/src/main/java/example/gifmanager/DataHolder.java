@@ -16,6 +16,8 @@ public class DataHolder {
     private String fieldNumber;
     private String team1Name;
     private String team2Name;
+    private int team1Sign = 0;
+    private int team2Sign = 0;
     private String team1Url;
     private String team2Url;
     private ArrayList<String> team1Members;
@@ -223,5 +225,21 @@ public class DataHolder {
         this.activeTeam = 0;
         this.parceUrl = "";
         this.target_age = "";
+    }
+
+    public int getTeam1Sign() {
+        return team1Sign;
+    }
+
+    public void setTeam1Sign(int team1Sign) {
+        this.team1Sign = team1Sign;
+    }
+
+    public int getTeam2Sign() {
+        return team2Sign;
+    }
+
+    public void setTeam2Sign(int team2Sign) {
+        this.team2Sign = team2Sign;
     }
 }
