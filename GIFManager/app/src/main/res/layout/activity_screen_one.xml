@@ -55,6 +55,8 @@
                     android:id="@+id/spinner2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:height="10dp"
+                    android:width = "10dp"
                     android:contentDescription="@string/year" />
 
             </android.support.design.widget.TextInputLayout>
