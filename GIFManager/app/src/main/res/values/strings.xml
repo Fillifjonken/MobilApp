@@ -14,7 +14,7 @@
     <string name="trainer_signature">signatur</string>
     <string name="fieldselect">Välj fotbollsplan</string>
     <string name="year">Cup År</string>
-    <string name="playeryear">Åldersgräns</string>
+    <string name="playeryear">Årsgrupp</string>
     <string name="password">Lösenord</string>
     <string name="repeat_password">Upprepa Lösenord</string>
     <string name="admin_email">Admin Email</string>

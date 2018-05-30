@@ -191,7 +191,7 @@ public class DataHolder {
     }
     public void setTarget_age(String target_age){this.target_age = target_age;}
     public int getTarget_age(){
-        int age = Integer.parseInt(target_age)
+        int age = Integer.parseInt(target_age);
         return age;
     }
 
@@ -222,6 +222,6 @@ public class DataHolder {
         this.reportPath = "";
         this.activeTeam = 0;
         this.parceUrl = "";
-        this.target_age = 16;
+        this.target_age = "";
     }
 }
