@@ -13,12 +13,10 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.text.pdf.draw.LineSeparator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -60,13 +58,6 @@ public class PDFActivity extends Activity {
         document.addAuthor(DataHolder.getInstance().getAdminCode());
         document.addCreator(DataHolder.getInstance().getAdminCode());
 
-        /***
-         * Variables for further use....
-         */
-        BaseColor mColorAccent = new BaseColor(0, 153, 204, 255);
-        float mHeadingFontSize = 20.0f;
-        float mValueFontSize = 26.0f;
-
 
         BaseFont urName = null;
 
@@ -78,12 +69,9 @@ public class PDFActivity extends Activity {
             e.printStackTrace();
         }
 
-        // LINE SEPARATOR
-        LineSeparator lineSeparator = new LineSeparator();
-        lineSeparator.setLineColor(new BaseColor(0, 0, 0, 68));
-
         // Title Order Details...
         // Adding Title....
+        /*
         Font mOrderDetailsTitleFont = new Font(urName, 36.0f, Font.NORMAL, BaseColor.BLACK);
         // Creating Chunk
         Chunk mOrderDetailsTitleChunk = new Chunk(getString(R.string.match_report), mOrderDetailsTitleFont);
@@ -102,11 +90,13 @@ public class PDFActivity extends Activity {
             document.add(new Chunk(" "));
         } catch (DocumentException e) {
             e.printStackTrace();
-        }
+        }*/
 
         try {
             Font registeredPlayersFont = new Font(urName, 24.0f, Font.NORMAL, BaseColor.BLACK);
-            Chunk registeredPlayersChunk = new Chunk(getString(R.string.registered_players), registeredPlayersFont);
+            String titleString = "Match " + DataHolder.getInstance().getNr() + " " +
+                    "20" + DataHolder.getInstance().getCurrentDate();
+            Chunk registeredPlayersChunk = new Chunk(titleString, registeredPlayersFont);
             // Creating Paragraph to add...
             Paragraph registeredPlayersParagraph = new Paragraph(registeredPlayersChunk);
             // Setting Alignment for Heading
@@ -118,7 +108,17 @@ public class PDFActivity extends Activity {
         }
 
         try {
+            //document.add(new Chunk(" "));
+            document.add(Chunk.NEWLINE);
             document.add(createPlayerTable());
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            document.add(new Chunk(" "));
+            document.add(createResultAndFairplayTable());
         } catch (DocumentException e) {
             e.printStackTrace();
         }
@@ -126,25 +126,6 @@ public class PDFActivity extends Activity {
         try {
             document.add(new Chunk(" "));
             document.add(signatureTable());
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            Font resultAndFairplayFont = new Font(urName, 24.0f, Font.NORMAL, BaseColor.BLACK);
-            Chunk rafChunk = new Chunk(getString(R.string.result_and_fairplay), resultAndFairplayFont);
-            // Creating Paragraph to add...
-            Paragraph rafPar = new Paragraph(rafChunk);
-            // Setting Alignment for Heading
-            rafPar.setAlignment(Element.ALIGN_CENTER);
-            document.add(rafPar);
-            //document.add(Chunk.NEWLINE);
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            document.add(createResultAndFairplayTable());
         } catch (DocumentException e) {
             e.printStackTrace();
         }
@@ -159,11 +140,27 @@ public class PDFActivity extends Activity {
         // the cell object
         PdfPCell team1Cell;
         PdfPCell team2Cell;
-        // we add a cell with colspan 3
-        team1Cell = new PdfPCell(new Phrase(DataHolder.getInstance().getTeam1Name()));
+
+
+        BaseFont urName = null;
+        Font tableHeading = new Font(urName, 24.0f, Font.NORMAL, BaseColor.BLACK);
+
+        Chunk rChunk = new Chunk(DataHolder.getInstance().getTeam1Name(), tableHeading);
+        // Creating Paragraph to add...
+        Paragraph rPar = new Paragraph(rChunk);
+        // Setting Alignment for Heading
+        rPar.setAlignment(Element.ALIGN_CENTER);
+
+        Chunk fChunk = new Chunk(DataHolder.getInstance().getTeam2Name(), tableHeading);
+        // Creating Paragraph to add...
+        Paragraph fPar = new Paragraph(fChunk);
+        // Setting Alignment for Heading
+        fPar.setAlignment(Element.ALIGN_CENTER);
+
+        team1Cell = new PdfPCell(rPar);
         playerTable.addCell(team1Cell);
-        // now we add a cell with rowspan 2
-        team2Cell = new PdfPCell(new Phrase(DataHolder.getInstance().getTeam2Name()));
+
+        team2Cell = new PdfPCell(fPar);
         playerTable.addCell(team2Cell);
 
         ArrayList<String> team1 = DataHolder.getInstance().getTeam1Members();
@@ -222,10 +219,25 @@ public class PDFActivity extends Activity {
         PdfPTable table = new PdfPTable(2);
         PdfPCell cell;
 
-        cell = new PdfPCell(new Paragraph(getString(R.string.resultcard)));
+        BaseFont urName = null;
+        Font tableHeading = new Font(urName, 24.0f, Font.NORMAL, BaseColor.BLACK);
+
+        Chunk rChunk = new Chunk(getString(R.string.resultcard), tableHeading);
+        // Creating Paragraph to add...
+        Paragraph rPar = new Paragraph(rChunk);
+        // Setting Alignment for Heading
+        rPar.setAlignment(Element.ALIGN_CENTER);
+
+        Chunk fChunk = new Chunk(getString(R.string.fairplay), tableHeading);
+        // Creating Paragraph to add...
+        Paragraph fPar = new Paragraph(fChunk);
+        // Setting Alignment for Heading
+        fPar.setAlignment(Element.ALIGN_CENTER);
+
+        cell = new PdfPCell(rPar);
         table.addCell(cell);
 
-        cell = new PdfPCell(new Paragraph(getString(R.string.fairplay)));
+        cell = new PdfPCell(fPar);
         table.addCell(cell);
 
         cell = new PdfPCell(img);
@@ -259,15 +271,30 @@ public class PDFActivity extends Activity {
             e.printStackTrace();
         }
 
+        BaseFont urName = null;
+        Font tableHeading = new Font(urName, 18.0f, Font.NORMAL, BaseColor.BLACK);
+
+        Chunk rChunk = new Chunk(DataHolder.getInstance().getTeam1Name() + " " +
+                getString(R.string.trainer_signature), tableHeading);
+        // Creating Paragraph to add...
+        Paragraph rPar = new Paragraph(rChunk);
+        // Setting Alignment for Heading
+        rPar.setAlignment(Element.ALIGN_CENTER);
+
+        Chunk fChunk = new Chunk(DataHolder.getInstance().getTeam2Name() + " " +
+                getString(R.string.trainer_signature), tableHeading);
+        // Creating Paragraph to add...
+        Paragraph fPar = new Paragraph(fChunk);
+        // Setting Alignment for Heading
+        fPar.setAlignment(Element.ALIGN_CENTER);
+
         PdfPTable table = new PdfPTable(2);
         PdfPCell cell;
 
-        cell = new PdfPCell(new Paragraph(DataHolder.getInstance().getTeam1Name() + " " +
-                getString(R.string.trainer_signature)));
+        cell = new PdfPCell(rPar);
         table.addCell(cell);
 
-        cell = new PdfPCell(new Paragraph(DataHolder.getInstance().getTeam2Name() + " " +
-                getString(R.string.trainer_signature)));
+        cell = new PdfPCell(fPar);
         table.addCell(cell);
 
         cell = new PdfPCell(img);
