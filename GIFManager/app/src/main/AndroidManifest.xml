@@ -3,7 +3,7 @@
     package="example.gifmanager">
 
     <uses-sdk
-        android:maxSdkVersion="25"
+        android:maxSdkVersion="27"
         android:minSdkVersion="17" />
 
     <uses-permission android:name="android.permission.INTERNET" />
