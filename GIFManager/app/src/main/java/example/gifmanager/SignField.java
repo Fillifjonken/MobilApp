@@ -120,12 +120,11 @@ public class SignField extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Signatur sparad", Toast.LENGTH_LONG).show();
         //sets the flag for enabling the continue button in previous activity
         if (team.equals("Hemmalag")){
-            ScreenFour.signatureFlag1 = true;
+            DataHolder.getInstance().setTeam1Sign(1);
         }
         if (team.equals("Bortalag")){
-            ScreenFour.signatureFlag2 = true;
+            DataHolder.getInstance().setTeam2Sign(1);
         }
-        //ScreenFour.signatureFlag = true;
         Intent intent = new Intent();
         setResult(ScreenFour.RESULT_OK, intent);
         finish();
