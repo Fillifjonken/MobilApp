@@ -72,6 +72,20 @@ public class ScreenThree extends MainActivity{
         new urlParcer().execute();
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        button4 = (Button)findViewById(R.id.button4);
+        int team1Sign = DataHolder.getInstance().getTeam1Sign();
+        int team2Sign = DataHolder.getInstance().getTeam2Sign();
+        if ((team1Sign == 1) && (team2Sign == 1)){
+            button4.setEnabled(true);
+        }else {
+            button4.setEnabled(false);
+        }
+
+
+    }
 
     public void openScreenFourTeam1(View view){
         Intent intent = new Intent(getApplicationContext(), ScreenFour.class);

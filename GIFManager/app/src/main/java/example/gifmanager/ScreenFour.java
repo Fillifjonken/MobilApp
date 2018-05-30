@@ -174,10 +174,12 @@ public class ScreenFour extends AppCompatActivity {
 
     //Checks if SignatureFlag is true (meaning user has entered signature)
     public void checkSignatureFlag(){
+        int team1Sign = DataHolder.getInstance().getTeam1Sign();
+        int team2Sign = DataHolder.getInstance().getTeam2Sign();
         //Checks which signature has been done
-        if ( (signatureFlag1 && (DataHolder.getInstance().getActiveTeam() == 1)) || (signatureFlag2 && (DataHolder.getInstance().getActiveTeam() == 2)) ) {
+        if ( (team1Sign == 1) && (DataHolder.getInstance().getActiveTeam() == 1) || ((team2Sign == 1) && (DataHolder.getInstance().getActiveTeam() == 2)) ) {
             mConfirm.setEnabled(true); //Enables "confirm"-button
-            mConfirm.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_back_ready));
+            mConfirm.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_back));
         } else {
             mConfirm.setEnabled(false); //Disables "confirm"-button
             //mConfirm.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_back_not_ready));
