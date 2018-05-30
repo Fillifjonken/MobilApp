@@ -27,6 +27,7 @@ public class DataHolder {
     private String reportPath;
     private int activeTeam;
     private String parceUrl;
+    private int target_age; //2 digit number
 
     private static final DataHolder holder = new DataHolder();
     public static DataHolder getInstance() {return holder;}
@@ -188,6 +189,8 @@ public class DataHolder {
     public String getParceUrl(){
         return parceUrl;
     }
+    public void setTarget_age(int target_age){this.target_age = target_age;}
+    public int getTarget_age(){return target_age;}
 
     // initialized variables and sets default values
     public void initDataHolder(){
@@ -216,6 +219,7 @@ public class DataHolder {
         this.reportPath = "";
         this.activeTeam = 0;
         this.parceUrl = "";
+        this.target_age = 00;
     }
 
 }
