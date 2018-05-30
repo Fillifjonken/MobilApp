@@ -1,10 +1,8 @@
 package example.gifmanager;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -31,11 +29,13 @@ public class ScreenFour extends AppCompatActivity {
     String team = "Lag"; // or other values
     TextView teamName;
     Button mConfirm;
+    Button mAdmin;
     private ArrayList<String> adapterBuffer; //Array for adding to the list view adapter
     private ArrayList<String> playerNames; //temporary array for storing player names
     private ArrayAdapter playerAdapter; //adapter for the list view
     ListView player_list;
     private String urlPlayers; //url for fetching url to players
+    private Boolean adminFlag = false;
 
 
     @Override
@@ -52,6 +52,7 @@ public class ScreenFour extends AppCompatActivity {
         //teamName.setText("Konfigurera lag: " + team);
         mConfirm = (Button) findViewById(R.id.confirm_button);
         player_list = (ListView) findViewById(R.id.players_list);
+        mAdmin = (Button) findViewById(R.id.admin_access);
         //player_list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         //player_list.setSelector(R.color.colorPrimaryDark);
         player_list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -66,6 +67,15 @@ public class ScreenFour extends AppCompatActivity {
                 addPlayer(item);
             }
         });
+
+        mAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adminFlag = true;
+                Toast.makeText(ScreenFour.this, "Adminrättigheter aktiverade", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         fetchUrl(); //fetches parcing url
         checkSignatureFlag(); //checks Signature flag
         new playerParcer().execute(); //start parcer
@@ -87,7 +97,7 @@ public class ScreenFour extends AppCompatActivity {
             if(getCurrentPlayerAge(player) == 999){
                 playerNames.add(player);
             }
-            else if(getCurrentPlayerAge(player)<= DataHolder.getInstance().getTarget_age()){
+            else if((getCurrentPlayerAge(player)<= DataHolder.getInstance().getTarget_age()) || adminFlag){
                 playerNames.add(player);
             }else if((getCurrentPlayerAge(player) > DataHolder.getInstance().getTarget_age()) && (overage_counter < 2)){
                 playerNames.add(player);

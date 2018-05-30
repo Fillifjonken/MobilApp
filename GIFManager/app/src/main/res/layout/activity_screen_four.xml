@@ -5,6 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/admin_access"
+        android:layout_width="54dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="508dp"
+        android:layout_marginStart="288dp"
+        android:layout_weight="1"
+        android:background="@drawable/button_back"
+        android:onClick="openSignature"
+        android:text="@string/admin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <ImageView
         android:id="@+id/background"
         android:layout_width="match_parent"
@@ -28,7 +41,7 @@
         android:fontFamily="serif"
         android:paddingTop="0dp"
         android:text="Konfigurera lag"
-        android:textAlignment="center"
+        android:textAlignment="gravity"
         android:textAllCaps="true"
         android:textColor="#009568"
         android:textSize="24sp"
