@@ -68,10 +68,7 @@ public class ScreenOne extends AppCompatActivity {
 
         this.button1 = (Button) findViewById(R.id.button);
 
-
-
-
-
+        
         //Handle spinner and year in form.
         //Also uggly but redo --Later
         String a[] = generateList();
@@ -82,24 +79,8 @@ public class ScreenOne extends AppCompatActivity {
         this.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                switch (i){
-                    case 0:
-                        dh.setCurrentDate(myAdapter.getItem(i));
-                        sDate = cutString(myAdapter.getItem(i));
-                        break;
-                    case 1:
-                        dh.setCurrentDate(myAdapter.getItem(i));
-                        sDate = cutString(myAdapter.getItem(i));
-                        break;
-                    case 2:
-                        dh.setCurrentDate(myAdapter.getItem(i));
-                        sDate = cutString(myAdapter.getItem(i));
-                        break;
-                    case 3:
-                        dh.setCurrentDate(myAdapter.getItem(i));
-                        sDate = cutString(myAdapter.getItem(i));
-                        break;
-                }
+                dh.setCurrentDate(myAdapter.getItem(i));
+                sDate = cutString(myAdapter.getItem(i));
             }
 
 
