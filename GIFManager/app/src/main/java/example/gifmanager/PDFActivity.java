@@ -69,33 +69,12 @@ public class PDFActivity extends Activity {
             e.printStackTrace();
         }
 
-        // Title Order Details...
-        // Adding Title....
-        /*
-        Font mOrderDetailsTitleFont = new Font(urName, 36.0f, Font.NORMAL, BaseColor.BLACK);
-        // Creating Chunk
-        Chunk mOrderDetailsTitleChunk = new Chunk(getString(R.string.match_report), mOrderDetailsTitleFont);
-        // Creating Paragraph to add...
-        Paragraph mOrderDetailsTitleParagraph = new Paragraph(mOrderDetailsTitleChunk);
-        // Setting Alignment for Heading
-        mOrderDetailsTitleParagraph.setAlignment(Element.ALIGN_CENTER);
-        // Finally Adding that Chunk
-        try {
-            document.add(mOrderDetailsTitleParagraph);
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        }
 
         try {
-            document.add(new Chunk(" "));
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        }*/
-
-        try {
+            // adds a title for the document
             Font registeredPlayersFont = new Font(urName, 24.0f, Font.NORMAL, BaseColor.BLACK);
             String titleString = "Match " + DataHolder.getInstance().getNr() + " " +
-                    "20" + DataHolder.getInstance().getCurrentDate();
+                    "20" + DataHolder.getInstance().getCurrentDate() + "\n\n";
             Chunk registeredPlayersChunk = new Chunk(titleString, registeredPlayersFont);
             // Creating Paragraph to add...
             Paragraph registeredPlayersParagraph = new Paragraph(registeredPlayersChunk);
@@ -108,8 +87,8 @@ public class PDFActivity extends Activity {
         }
 
         try {
-            //document.add(new Chunk(" "));
-            document.add(Chunk.NEWLINE);
+            // adds an empty space and adds a player table
+            //document.add(Chunk.NEWLINE);
             document.add(createPlayerTable());
         } catch (DocumentException e) {
             e.printStackTrace();
@@ -117,6 +96,7 @@ public class PDFActivity extends Activity {
 
 
         try {
+            // adds an empty space and adds a table with result and fairplay cards
             document.add(new Chunk(" "));
             document.add(createResultAndFairplayTable());
         } catch (DocumentException e) {
@@ -124,6 +104,7 @@ public class PDFActivity extends Activity {
         }
 
         try {
+            // adds an empty space and adds a table with signatures from both teams
             document.add(new Chunk(" "));
             document.add(signatureTable());
         } catch (DocumentException e) {
@@ -134,6 +115,9 @@ public class PDFActivity extends Activity {
         finish();
     }
 
+    /*
+     * creates a table with the registered players for each team
+     */
     public PdfPTable createPlayerTable() throws DocumentException {
         // a table with three columns
         PdfPTable playerTable = new PdfPTable(2);
@@ -193,6 +177,9 @@ public class PDFActivity extends Activity {
         return playerTable;
     }
 
+    /*
+     * Creates a table with the result and fairplaycard next to eachother with heading
+     */
     public PdfPTable createResultAndFairplayTable() throws DocumentException {
         Image img = null;
         try {
@@ -248,12 +235,15 @@ public class PDFActivity extends Activity {
         return table;
     }
 
+    /*
+     * creates a table with the signature of both teams
+     */
     public PdfPTable signatureTable() throws DocumentException {
         Image img = null;
         try {
             String imagePath = DataHolder.getInstance().getTeam1SignaturePath();
             img = Image.getInstance(imagePath);
-            img.scaleToFit(200, 180);
+            img.scaleToFit(200, 100);
         } catch (BadElementException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -264,7 +254,7 @@ public class PDFActivity extends Activity {
         try {
             String imagePath = DataHolder.getInstance().getTeam2SignaturePath();
             img2 = Image.getInstance(imagePath);
-            img2.scaleToFit(200, 180);
+            img2.scaleToFit(200, 100);
         } catch (BadElementException e) {
             e.printStackTrace();
         } catch (IOException e) {

@@ -1,6 +1,7 @@
 package example.gifmanager;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -156,8 +157,10 @@ public class ScreenFour extends AppCompatActivity {
         //Checks which signature has been done
         if ( (signatureFlag1 && (DataHolder.getInstance().getActiveTeam() == 1)) || (signatureFlag2 && (DataHolder.getInstance().getActiveTeam() == 2)) ) {
             mConfirm.setEnabled(true); //Enables "confirm"-button
+            mConfirm.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_back_ready));
         } else {
             mConfirm.setEnabled(false); //Disables "confirm"-button
+            //mConfirm.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_back_not_ready));
         }
     }
 
