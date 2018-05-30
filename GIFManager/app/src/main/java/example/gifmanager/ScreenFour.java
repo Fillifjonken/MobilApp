@@ -20,6 +20,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class ScreenFour extends AppCompatActivity {
     public static boolean signatureFlag1;    //Signifies that the user has entered its signature
@@ -59,7 +60,7 @@ public class ScreenFour extends AppCompatActivity {
             public void onItemClick(AdapterView<?>adapterView, View v, int pos, long id){
 
                 String item = ((TextView)v).getText().toString();
-                player_list.setItemChecked(pos, true);
+                //player_list.setItemChecked(pos, true);
                 //Toast.makeText(getBaseContext(), item + " tillagd i spelarlistan", Toast.LENGTH_SHORT).show();
                 addPlayer(item);
             }
@@ -81,11 +82,17 @@ public class ScreenFour extends AppCompatActivity {
     //add player name to temporary array
     public void addPlayer(String player){
         if(!playerNames.contains(player)){
-            if(getCurrentPlayerAge(player)<= DataHolder.getInstance().getTarget_age()){
+            if(getCurrentPlayerAge(player) == 999){
+                playerNames.add(player);
+            }
+            else if(getCurrentPlayerAge(player)<= DataHolder.getInstance().getTarget_age()){
                 playerNames.add(player);
             }else if((getCurrentPlayerAge(player)> DataHolder.getInstance().getTarget_age()) && (overage_counter < 2)){
                 playerNames.add(player);
                 overage_counter++;
+                if(overage_counter == 2){
+                    Toast.makeText(ScreenFour.this, "Max Spelare Över Åldersgräns", Toast.LENGTH_SHORT).show();
+                }
             }
 
         }else{
@@ -104,10 +111,16 @@ public class ScreenFour extends AppCompatActivity {
 
     public int getCurrentPlayerAge(String player){
         String lastTwo = null;
+        int foo = 0;
         if (player != null && player.length() >= 4) {
             lastTwo = player.substring(player.length() - 4, player.length() - 2);
         }
-        int foo = Integer.parseInt(lastTwo);
+        if(Pattern.matches("[a-zA-Z]+", lastTwo) == false){
+            foo = Integer.parseInt(lastTwo);
+        }else{
+            foo = 999;
+        }
+
         return foo;
     }
     //Opens SignField activity with result request
@@ -178,7 +191,7 @@ public class ScreenFour extends AppCompatActivity {
         //Adds all parced playernames into the listview on the screen
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            playerAdapter = new ArrayAdapter(ScreenFour.this, R.layout.list_view_row, adapterBuffer);
+            playerAdapter = new ArrayAdapter(ScreenFour.this, android.R.layout.simple_list_item_multiple_choice, adapterBuffer);
             //playerAdapter = new ArrayAdapter(ScreenFour.this, android.R.layout.simple_list_item_1, adapterBuffer);
             player_list.setAdapter(playerAdapter);
 

@@ -52,6 +52,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         android:background="@drawable/button_back"
+        android:choiceMode="multipleChoice"
 
         app:layout_constraintTop_toBottomOf="@+id/textView_teamname"
         />

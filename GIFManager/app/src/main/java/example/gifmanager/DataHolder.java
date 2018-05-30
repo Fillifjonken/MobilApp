@@ -219,7 +219,7 @@ public class DataHolder {
         this.reportPath = "";
         this.activeTeam = 0;
         this.parceUrl = "";
-        this.target_age = 01;
+        this.target_age = 00;
     }
 
 }
